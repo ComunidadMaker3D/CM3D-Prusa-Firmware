@@ -141,54 +141,63 @@ static const float width = 0.4; //!< line width
 static const float length = 20 - width; //!< line length
 static const float height = 0.2; //!< layer height TODO This is wrong, as current Z height is 0.15 mm
 static const float extr = count_e(height, width, length); //!< E axis movement needed to print line
+static const float endX = static_cast<float>(X_MAX_POS)-20.d;
+static const float startY = static_cast<float>(Y_MAX_POS)-20.f;
+static const float startX = 20.f;
+static const float lengthCSy = ((startY-55.f)/5.f) - width; //!< line length
+static const float lengthCSx = ((endX-startX)-width);
+static const float lengthCSx_short = lengthCSx - 50.f;
+static const float lengthCSx_short2 = lengthCSx - 30.f;
+static const float extrX = count_e(height, width,lengthCSx);
+static const float extrY = count_e(height, width, lengthCSy);
+static const float extrX_short = count_e(height, width, lengthCSx_short);
+static const float extrX_short2 = count_e(height, width, lengthCSx_short2);
+static const float posY1 = startY-lengthCSy;
+static const float posY2 = posY1-lengthCSy;
+static const float posY3 = posY2-lengthCSy;
+static const float posY4 = posY3-lengthCSy;
+static const float posY5 = posY4-lengthCSy;
 
 //! @brief Print meander
 //! @param cmd_buffer character buffer needed to format gcodes
 void lay1cal_meander(char *cmd_buffer)
 {
-    static const char cmd_meander_0[] PROGMEM = "G1 X50 Y155";
-    static const char cmd_meander_1[] PROGMEM = "G1 Z0.150 F7200.000";
-    static const char cmd_meander_2[] PROGMEM = "G1 F1080";
-    static const char cmd_meander_3[] PROGMEM = "G1 X75 Y155 E2.5";
-    static const char cmd_meander_4[] PROGMEM = "G1 X100 Y155 E2";
-    static const char cmd_meander_5[] PROGMEM = "G1 X200 Y155 E2.62773";
-    static const char cmd_meander_6[] PROGMEM = "G1 X200 Y135 E0.66174";
-    static const char cmd_meander_7[] PROGMEM = "G1 X50 Y135 E3.62773";
-    static const char cmd_meander_8[] PROGMEM = "G1 X50 Y115 E0.49386";
-    static const char cmd_meander_9[] PROGMEM = "G1 X200 Y115 E3.62773";
-    static const char cmd_meander_10[] PROGMEM = "G1 X200 Y95 E0.49386";
-    static const char cmd_meander_11[] PROGMEM = "G1 X50 Y95 E3.62773";
-    static const char cmd_meander_12[] PROGMEM = "G1 X50 Y75 E0.49386";
-    static const char cmd_meander_13[] PROGMEM = "G1 X200 Y75 E3.62773";
-    static const char cmd_meander_14[] PROGMEM = "G1 X200 Y55 E0.49386";
-    static const char cmd_meander_15[] PROGMEM = "G1 X50 Y55 E3.62773";
-
-    static const char * const cmd_meander[] PROGMEM =
-    {
-        cmd_meander_0,
-        cmd_meander_1,
-        cmd_meander_2,
-        cmd_meander_3,
-        cmd_meander_4,
-        cmd_meander_5,
-        cmd_meander_6,
-        cmd_meander_7,
-        cmd_meander_8,
-        cmd_meander_9,
-        cmd_meander_10,
-        cmd_meander_11,
-        cmd_meander_12,
-        cmd_meander_13,
-        cmd_meander_14,
-        cmd_meander_15,
-    };
-
-    for (uint8_t i = 0; i < (sizeof(cmd_meander)/sizeof(cmd_meander[0])); ++i)
-    {
-        enquecommand_P(static_cast<char*>(pgm_read_ptr(&cmd_meander[i])));
-    }
+    //print the first part of the meander
+    sprintf_P(cmd_buffer, PSTR("G1 X%-2.f Y%-.2f"), startX, startY);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR("G1 Z0.150 F7200.000"));
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR("G1 F1080"));
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X45 Y%-2.f E2.5"),startY);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X70 Y%-2.f E2.5"),startY);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, startY, extrX_short);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY1 , extrY);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), startX, posY1, extrX);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), startX, posY2 , extrY);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY2 , extrX);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY3 , extrY);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), startX, posY3 , extrX);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), startX, posY4 , extrY);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY4 , extrX);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY5 , extrY);
+    enquecommand(cmd_buffer);
+    sprintf_P(cmd_buffer, PSTR( "G1 X50 Y%-.2f E%-.3f"), posY5 , extrX_short2);
+    enquecommand(cmd_buffer);
     sprintf_P(cmd_buffer, PSTR("G1 X50 Y35 E%-.3f"), extr);
     enquecommand(cmd_buffer);
+
 }
 
 //! @brief Print square

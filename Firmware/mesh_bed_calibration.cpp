@@ -89,6 +89,30 @@ const float bed_ref_points_4[] PROGMEM = {
 	37.f - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER  - SHEET_PRINT_ZERO_REF_X,
 	210.4f - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y
 };
+#elif defined(HEATBED_CS) //CustomSize
+
+/**
+ * [0,0] bed print area point X coordinate in bed coordinates ver. 05d/24V
+ */
+#define BED_PRINT_ZERO_REF_X 2.f
+/**
+ * [0,0] bed print area point Y coordinate in bed coordinates ver. 05d/24V
+ */
+#define BED_PRINT_ZERO_REF_Y 9.4f
+
+const float bed_ref_points_4[] PROGMEM = {
+	FL_CAL_POINT_X_POSITION - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_X,
+	FL_CAL_POINT_Y_POSITION - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y,
+
+	FR_CAL_POINT_X_POSITION - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER  - SHEET_PRINT_ZERO_REF_X,
+	FR_CAL_POINT_Y_POSITION - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y,
+
+	RR_CAL_POINT_X_POSITION - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER  - SHEET_PRINT_ZERO_REF_X,
+	RR_CAL_POINT_Y_POSITION - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y,
+
+	RL_CAL_POINT_X_POSITION - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER  - SHEET_PRINT_ZERO_REF_X,
+	RL_CAL_POINT_Y_POSITION - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y
+};
 
 #else
 
@@ -106,7 +130,7 @@ const float bed_ref_points_4[] PROGMEM = {
 
 static inline float sqr(float x) { return x * x; }
 
-#ifdef HEATBED_V2
+#if defined(HEATBED_V2)  || defined(HEATBED_CS)
 static inline bool point_on_1st_row(const uint8_t /*i*/)
 {
 	return false;
@@ -1072,14 +1096,14 @@ BedSkewOffsetDetectionResultType xyzcal_find_bed_induction_sensor_point_xy();
 #define FIND_BED_INDUCTION_SENSOR_POINT_X_RADIUS (8.f)
 #define FIND_BED_INDUCTION_SENSOR_POINT_Y_RADIUS (4.f)
 #define FIND_BED_INDUCTION_SENSOR_POINT_XY_STEP  (1.f)
-#ifdef HEATBED_V2
+#if defined(HEATBED_V2) || defined(HEATBED_CS)
 #define FIND_BED_INDUCTION_SENSOR_POINT_Z_STEP   (2.f)
 #define FIND_BED_INDUCTION_SENSOR_POINT_MAX_Z_ERROR  (0.03f)
 #else //HEATBED_V2
 #define FIND_BED_INDUCTION_SENSOR_POINT_Z_STEP   (0.2f)
 #endif //HEATBED_V2
 
-#ifdef HEATBED_V2
+#if defined(HEATBED_V2) || defined(HEATBED_CS)
 BedSkewOffsetDetectionResultType find_bed_induction_sensor_point_xy(int
 #if !defined (NEW_XYZCAL) && defined (SUPPORT_VERBOSITY)
         verbosity_level
@@ -2320,7 +2344,7 @@ BedSkewOffsetDetectionResultType find_bed_offset_and_skew(int8_t verbosity_level
         }
 
 #ifndef NEW_XYZCAL
-#ifndef HEATBED_V2
+#if !defined(HEATBED_V2) || !defined(HEATBED_CS)
 		
 			if (k == 0 || k == 1) {
 				// Improve the position of the 1st row sensor points by a zig-zag movement.

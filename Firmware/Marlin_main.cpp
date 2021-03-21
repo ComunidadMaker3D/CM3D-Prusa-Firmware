@@ -3627,7 +3627,7 @@ bool gcode_M45(bool onlyZ, int8_t verbosity_level)
 //#ifndef NEW_XYZCAL
 				if (result >= 0)
 				{
-					#ifdef HEATBED_V2
+					#if defined(HEATBED_V2) || defined(HEATBED_CS)
 					sample_z();
 					#else //HEATBED_V2
 					point_too_far_mask = 0;
@@ -3645,7 +3645,7 @@ bool gcode_M45(bool onlyZ, int8_t verbosity_level)
 					plan_buffer_line_curposXYZE(homing_feedrate[Z_AXIS] / 40);
 					st_synchronize();
 					// if (result >= 0) babystep_apply();					
-					#endif //HEATBED_V2
+					#endif //HEATBED_V2 || HEATBED_CS
 				}
 //#endif //NEW_XYZCAL
 				lcd_update_enable(true);
@@ -3656,7 +3656,7 @@ bool gcode_M45(bool onlyZ, int8_t verbosity_level)
 				{
 					// Calibration valid, the machine should be able to print. Advise the user to run the V2Calibration.gcode.
 					calibration_status_store(CALIBRATION_STATUS_LIVE_ADJUST);
-					if (eeprom_read_byte((uint8_t*)EEPROM_WIZARD_ACTIVE) != 1) lcd_show_fullscreen_message_and_wait_P(_T(MSG_BABYSTEP_Z_NOT_SET));
+					if (eeprom_Sread_byte((uint8_t*)EEPROM_WIZARD_ACTIVE) != 1) lcd_show_fullscreen_message_and_wait_P(_T(MSG_BABYSTEP_Z_NOT_SET));
 					final_result = true;
 				}
 			}
