@@ -7623,6 +7623,7 @@ static bool lcd_selfcheck_axis_sg(unsigned char axis) {
 	case 1: axis_length = Y_MAX_POS + 8; break;
 	default: axis_length = 210; break;
 	}
+	#endif
 
 	tmc2130_sg_stop_on_crash = false;
 	tmc2130_home_exit();
