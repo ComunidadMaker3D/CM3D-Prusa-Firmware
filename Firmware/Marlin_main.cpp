@@ -8479,6 +8479,7 @@ Sigma_Exit:
           switch((ClPrintChecking)nCommand)
                {
                case ClPrintChecking::_Nozzle:     // ~ .1
+                    steel_sheet_check();
                     uint16_t nDiameter;
                     if(code_seen('P'))
                          {
@@ -8531,16 +8532,16 @@ Sigma_Exit:
                }
     break;
 
-  /*!
-  ### M880 - Check the Steel Sheet, the M880 code should be set before to start the print in order to ask the user about
-  the viability of use the current configured steel sheet and try to minimize the risk of use a sheet with the configuration 
-  of another sheet
-  ### Usage
-      M880
-  */
-    case 880:
-      steel_sheet_check();
-    break;
+  // /*!
+  // ### M880 - Check the Steel Sheet, the M880 code should be set before to start the print in order to ask the user about
+  // the viability of use the current configured steel sheet and try to minimize the risk of use a sheet with the configuration 
+  // of another sheet
+  // ### Usage
+  //     M880
+  // */
+  //   case 880:
+  //     steel_sheet_check();
+  //   break;
 
 #ifdef LIN_ADVANCE
     /*!
