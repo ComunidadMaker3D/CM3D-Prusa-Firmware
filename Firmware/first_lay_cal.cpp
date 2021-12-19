@@ -54,6 +54,7 @@ void lay1cal_load_filament(char *cmd_buffer, uint8_t filament)
 
 }
 
+
 //! @brief Print intro line
 void lay1cal_intro_line()
 {
@@ -142,63 +143,47 @@ static const float width = 0.4; //!< line width
 static const float length = 20 - width; //!< line length
 static const float height = 0.2; //!< layer height TODO This is wrong, as current Z height is 0.15 mm
 static const float extr = count_e(height, width, length); //!< E axis movement needed to print line
-static const float endX = static_cast<float>(X_MAX_POS)-20.d;
-static const float startY = static_cast<float>(Y_MAX_POS)-20.f;
-static const float startX = 20.f;
-static const float lengthCSy = ((startY-55.f)/5.f) - width; //!< line length
-static const float lengthCSx = ((endX-startX)-width);
+static float xPos1ly[2] = {static_cast<float>(X_MAX_POS)-20.f,20.f};
+static const float lengthCSy = (((static_cast<float>(Y_MAX_POS)-20.f)-55.f)/5.f) - width; //!< line length
+static float yPos1ly[6] = {static_cast<float>(Y_MAX_POS)-20.f,(static_cast<float>(Y_MAX_POS)-20.f)-lengthCSy,
+(static_cast<float>(Y_MAX_POS)-20.f)-(2*lengthCSy),(static_cast<float>(Y_MAX_POS)-20.f)-(3*lengthCSy),
+(static_cast<float>(Y_MAX_POS)-20.f)-(4*lengthCSy),(static_cast<float>(Y_MAX_POS)-20.f)-(5*lengthCSy)};
+static const float lengthCSx = ((xPos1ly[0]-xPos1ly[1])-width);
 static const float lengthCSx_short = lengthCSx - 50.f;
-static const float lengthCSx_short2 = lengthCSx - 30.f;
 static const float extrX = count_e(height, width,lengthCSx);
 static const float extrY = count_e(height, width, lengthCSy);
 static const float extrX_short = count_e(height, width, lengthCSx_short);
-static const float extrX_short2 = count_e(height, width, lengthCSx_short2);
-static const float posY1 = startY-lengthCSy;
-static const float posY2 = posY1-lengthCSy;
-static const float posY3 = posY2-lengthCSy;
-static const float posY4 = posY3-lengthCSy;
-static const float posY5 = posY4-lengthCSy;
+//static const float extrX_short2 = count_e(height, width, lengthCSx_short2);
 
 //! @brief Print meander
 //! @param cmd_buffer character buffer needed to format gcodes
 void lay1cal_meander(char *cmd_buffer)
 {
-    //print the first part of the meander
-    sprintf_P(cmd_buffer, PSTR("G1 X%-2.f Y%-.2f"), startX, startY);
+    uint8_t y=1;
+    uint8_t x=0;
+     //print the first part of the meander
+    sprintf_P(cmd_buffer, PSTR("G1 X%-2.f Y%-.2f"), xPos1ly[1], yPos1ly[0]);
     enquecommand(cmd_buffer);
     sprintf_P(cmd_buffer, PSTR("G1 Z0.150 F7200.000"));
     enquecommand(cmd_buffer);
     sprintf_P(cmd_buffer, PSTR("G1 F1080"));
     enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X45 Y%-2.f E2.5"),startY);
+    sprintf_P(cmd_buffer, PSTR( "G1 X70 Y%-2.f E5"),yPos1ly[0]);
     enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X70 Y%-2.f E2.5"),startY);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, startY, extrX_short);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY1 , extrY);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), startX, posY1, extrX);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), startX, posY2 , extrY);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY2 , extrX);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY3 , extrY);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), startX, posY3 , extrX);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), startX, posY4 , extrY);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY4 , extrX);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), endX, posY5 , extrY);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR( "G1 X50 Y%-.2f E%-.3f"), posY5 , extrX_short2);
-    enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, PSTR("G1 X50 Y35 E%-.3f"), extr);
+    sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), xPos1ly[0], yPos1ly[0], extrX_short);
     enquecommand(cmd_buffer);
 
+    for(y=1;y<6;y++)
+    {
+        sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), xPos1ly[x], yPos1ly[y] , extrY);
+        enquecommand(cmd_buffer);
+        if (x==0) x++; else x--;
+        sprintf_P(cmd_buffer, PSTR( "G1 X%-2.f Y%-.2f E%-.3f"), xPos1ly[x], yPos1ly[y] , extrX);
+        enquecommand(cmd_buffer);
+       
+    }
+    sprintf_P(cmd_buffer, PSTR("G1 X20 Y35 E%-.3f"), extr);
+    enquecommand(cmd_buffer);
 }
 
 //! @brief Print square
@@ -213,23 +198,16 @@ void lay1cal_square(char *cmd_buffer, uint8_t i)
 
     static const char fmt1[] PROGMEM = "G1 X%d Y%-.2f E%-.3f";
     static const char fmt2[] PROGMEM = "G1 Y%-.2f E%-.3f";
-    sprintf_P(cmd_buffer, fmt1, 70, (35 - i*width * 2), extr);
+    sprintf_P(cmd_buffer, fmt1, 40, (35 - i*width * 2), extr);
     enquecommand(cmd_buffer);
     sprintf_P(cmd_buffer, fmt2, (35 - (2 * i + 1)*width), extr_short_segment);
     enquecommand(cmd_buffer);
-    sprintf_P(cmd_buffer, fmt1, 50, (35 - (2 * i + 1)*width), extr);
+    sprintf_P(cmd_buffer, fmt1, 20, (35 - (2 * i + 1)*width), extr);
     enquecommand(cmd_buffer);
     sprintf_P(cmd_buffer, fmt2, (35 - (i + 1)*width * 2), extr_short_segment);
     enquecommand(cmd_buffer);
 }
 
-
-//! @brief Set the flow in order to the installed nozzle
-//!
-//! This function must be called before to start to print in order to 
-//! enqueue the correct flow depending the nozzle size stored on the 
-//! eeprom
-//!
 void lay1cal_set_flow()
 {    
     ClNozzleDiameter nDiameter=(ClNozzleDiameter)eeprom_read_byte((uint8_t*)EEPROM_NOZZLE_DIAMETER);
