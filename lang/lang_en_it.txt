@@ -1377,3 +1377,11 @@
 #MSG_PRINTER_IP c=18
 "Printer IP Addr:"
 "Ind. IP stampante:"
+
+#MSG_REPRINT c=10
+"Reprint"
+"Ristampare"
+
+#MSG_CHECK_STEEL_SHEET c=43
+"Check the steel sheet installed"
+"Controllare la lamiera d'acciaio installata"

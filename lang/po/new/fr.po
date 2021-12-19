@@ -1740,3 +1740,12 @@ msgstr "Mesurer x-fois"
 msgid "Printer IP Addr:"
 msgstr "Adr.IP imprimante:"
 
+#MSG_REPRINT c=12
+#: messages.c:164
+msgid "Reprint"
+msgstr "Reimpression"
+
+#MSG_CHECK_STEEL_SHEET c=34
+#: messages.c:165
+msgid "Check the steel sheet installed"
+msgstr "Verifier la tole d'acier installee"

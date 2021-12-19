@@ -6548,7 +6548,7 @@ static void lcd_main_menu()
 
 	if ( (!PRINTER_ACTIVE) && enableReprint && card.cardOK)
   	{
-		MENU_ITEM_SUBMENU_P(__T(MSG_REPRINT), reprint_from_eeprom);
+		MENU_ITEM_SUBMENU_P(_T(MSG_REPRINT), reprint_from_eeprom);
   	}else if (!card.cardOK)
 	  {	  //If the user remove the SD card the reprint will be disabled because you can't be sure that the gcode file will remain in the SD
 		  enableReprint = false; 

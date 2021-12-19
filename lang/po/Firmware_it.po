@@ -1740,3 +1740,12 @@ msgstr "Nr. Z-test"
 msgid "Printer IP Addr:"
 msgstr "Ind. IP stampante:"
 
+#MSG_REPRINT c=10
+#: messages.c:164
+msgid "Reprint"
+msgstr "Ristampare"
+
+#MSG_CHECK_STEEL_SHEET c=43
+#: messages.c:165
+msgid "Check the steel sheet installed"
+msgstr "Controllare la lamiera d'acciaio installata"
