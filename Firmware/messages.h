@@ -208,6 +208,7 @@ extern const char MSG_POWERPANIC_DETECTED[];
 extern const char MSG_LCD_STATUS_CHANGED[];
 extern const char MSG_UNKNOWN_CODE[];
 extern const char MSG_CHECK_STEEL_SHEET[];
+extenr const char MSG_REPRINT[];
 
 #if defined(__cplusplus)
 }
