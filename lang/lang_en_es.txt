@@ -1382,6 +1382,6 @@
 "Reprint"
 "Reimprimir"
 
-#MSG_CHECK_STEEL_SHEET c=31
-"Check the steel sheet installed"
-"Comprueba la plancha instalada"
+#MSG_CHECK_STEEL_SHEET c=34
+"Check the selected steel sheet:"
+"Compruebe la plancha seleccionada:"

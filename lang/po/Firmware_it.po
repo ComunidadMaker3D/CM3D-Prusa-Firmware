@@ -1745,7 +1745,7 @@ msgstr "Ind. IP stampante:"
 msgid "Reprint"
 msgstr "Ristampare"
 
-#MSG_CHECK_STEEL_SHEET c=43
+#MSG_CHECK_STEEL_SHEET c=44
 #: messages.c:165
-msgid "Check the steel sheet installed"
-msgstr "Controllare la lamiera d'acciaio installata"
+msgid "Check the selected steel sheet:"
+msgstr "Controllare la lamiera d'acciaio installata:"

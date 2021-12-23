@@ -1377,3 +1377,7 @@
 #MSG_PRINTER_IP c=18
 "Printer IP Addr:"
 "IP adr. tiskarny:"
+
+#MSG_CHECK_STEEL_SHEET c=35
+"Check the selected steel sheet:"
+"Zkontrolujte vybrany ocelovy plech:"

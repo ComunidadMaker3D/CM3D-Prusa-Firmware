@@ -524,7 +524,8 @@ void steel_sheet_check()
 	        sheet[7] = '\0';
             lcd_display_message_fullscreen_P(_T(MSG_CHECK_STEEL_SHEET));
             lcd_set_cursor(0,2);
-            lcd_printf_P(PSTR("%-7s, Continue?"),sheet);
+            lcd_printf_P(PSTR("%-7s"),sheet);
+            Sound_MakeSound(e_SOUND_TYPE_StandardPrompt);
             if (!lcd_wait_for_click_delay(MSG_PRINT_CHECKING_FAILED_TIMEOUT))
                 lcd_print_stop();
             lcd_update_enable(true);

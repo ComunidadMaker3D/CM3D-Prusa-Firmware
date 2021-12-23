@@ -1382,6 +1382,6 @@
 "Reprint"
 "Abdruck"
 
-#MSG_CHECK_STEEL_SHEET c=42
-"Check the steel sheet installed"
-"Uberprufen Sie das installierte Stahlblech"
+#MSG_CHECK_STEEL_SHEET c=43
+"Check the selected steel sheet:"
+"Uberprufen Sie das installierte Stahlblech:"

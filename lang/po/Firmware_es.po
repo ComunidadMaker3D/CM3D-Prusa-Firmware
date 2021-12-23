@@ -1745,7 +1745,7 @@ msgstr "Dir. IP impresora:"
 msgid "Reprint"
 msgstr "Reimprimir"
 
-#MSG_CHECK_STEEL_SHEET c=31 r=2
+#MSG_CHECK_STEEL_SHEET c=34 r=2
 #: messages.c:165
 msgid "Check the steel sheet installed"
 msgstr "Comprueba la plancha instalada"

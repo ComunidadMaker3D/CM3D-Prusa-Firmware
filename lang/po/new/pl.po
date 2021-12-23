@@ -1740,3 +1740,12 @@ msgstr "Ilosc Pomiarow"
 msgid "Printer IP Addr:"
 msgstr "Adr. IP drukarki:"
 
+# MSG_REPRINT c=8
+#: messages.c:164
+msgid "Reprint"
+msgstr "Przedruk"
+
+# MSG_CHECK_STEEL_SHEET c=31
+#: messages.c:165
+msgid "Check the selected steel sheet:"
+msgstr "Sprawdz wybrana blache stalowa:"

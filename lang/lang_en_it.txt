@@ -1382,6 +1382,6 @@
 "Reprint"
 "Ristampare"
 
-#MSG_CHECK_STEEL_SHEET c=43
-"Check the steel sheet installed"
-"Controllare la lamiera d'acciaio installata"
+#MSG_CHECK_STEEL_SHEET c=44
+"Check the selected steel sheet:"
+"Controllare la lamiera d'acciaio installata:"

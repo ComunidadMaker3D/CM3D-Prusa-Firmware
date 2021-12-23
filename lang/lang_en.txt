@@ -1037,4 +1037,4 @@
 "Reprint"
 
 #MSG_CHECK_STEEL_SHEET c=31
-"Check the steel sheet installed"
+"Check the selected steel sheet:"

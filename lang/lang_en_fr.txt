@@ -1382,6 +1382,6 @@
 "Reprint"
 "Reimpression"
 
-#MSG_CHECK_STEEL_SHEET c=34
-"Check the steel sheet installed"
-"Verifier la tole d'acier installee"
+#MSG_CHECK_STEEL_SHEET c=35
+"Check the selected steel sheet:"
+"Verifier la tole d'acier installee:"

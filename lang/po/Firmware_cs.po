@@ -1740,3 +1740,7 @@ msgstr "Pocet mereni Z"
 msgid "Printer IP Addr:"
 msgstr "IP adr. tiskarny:"
 
+# MSG_CHECK_STEEL_SHEET c=35
+#: messages.c:165
+msgid "Check the selected steel sheet:"
+msgstr "Zkontrolujte vybrany ocelovy plech:"
