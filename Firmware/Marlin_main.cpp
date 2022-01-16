@@ -1717,10 +1717,10 @@ void setup()
 
   fCheckModeInit();
   fSetMmuMode(mmu_enabled);
-  if(mmu_enabled)
-  {
-    enableTuneMmuMenu = true;
+  if (enableTuneMmuMenu){
+	  enableTuneMmuMenu = mmu_enabled;
   }
+  
   KEEPALIVE_STATE(NOT_BUSY);
 #ifdef WATCHDOG
   wdt_enable(WDTO_4S);

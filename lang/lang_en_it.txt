@@ -1389,3 +1389,7 @@
 #MSG_CHOOSE_NOZZLE c=33
 "Choose the nozzle size:"
 "Scegli la dimensione dellugello:"
+
+#MSG_TUNE_MMU c=16
+"Tune MMU"
+"Sintonizzare MMU"

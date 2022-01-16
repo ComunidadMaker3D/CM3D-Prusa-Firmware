@@ -1385,3 +1385,7 @@
 #MSG_CHOOSE_NOZZLE c=24
 "Choose the nozzle size:"
 "Vyberte velikost trysky:"
+
+#MSG_TUNE_MMU c=11
+"Tune MMU"
+"Naladit MMU"

@@ -1754,3 +1754,8 @@ msgstr "Sprawdz wybrana blache stalowa:"
 #: messages.c:166
 msgid "Choose the nozzle size:"
 msgstr "Wybierz rozmiar dyszy:"
+
+#MSG_TUNE_MMU c=11
+#: messages.c:166
+msgid "Tune MMU"
+msgstr "Dostroic MMU"

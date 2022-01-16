@@ -1749,3 +1749,8 @@ msgstr "Zkontrolujte vybrany ocelovy plech:"
 #: messages.c:166
 msgid "Choose the nozzle size:"
 msgstr "Vyberte velikost trysky:"
+
+#MSG_TUNE_MMU c=11
+#: messages.c:166
+msgid "Tune MMU"
+msgstr "Naladit MMU"

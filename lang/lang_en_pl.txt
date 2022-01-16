@@ -1389,3 +1389,7 @@
 #MSG_CHOOSE_NOZZLE c=29
 "Choose the nozzle size:"
 "Wybierz rozmiar dyszy:"
+
+#MSG_TUNE_MMU c=12
+"Tune MMU"
+"Dostroic MMU"
