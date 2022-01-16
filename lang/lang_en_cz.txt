@@ -1405,3 +1405,7 @@
 #MSG_CHECK_STEEL_SHEET c=35
 "Check the selected steel sheet:"
 "Zkontrolujte vybrany ocelovy plech:"
+
+#MSG_TUNE_MMU c=11
+"Tune MMU"
+"Naladit MMU"

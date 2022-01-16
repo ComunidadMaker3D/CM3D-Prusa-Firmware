@@ -207,6 +207,7 @@ extern const char MSG_LCD_STATUS_CHANGED[];
 extern const char MSG_UNKNOWN_CODE[];
 extern const char MSG_CHECK_STEEL_SHEET[];
 extern const char MSG_REPRINT[];
+extern const char MSG_TUNE_MMU[];
 
 #if defined(__cplusplus)
 }

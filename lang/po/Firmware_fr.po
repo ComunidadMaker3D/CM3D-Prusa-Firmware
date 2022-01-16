@@ -1774,3 +1774,8 @@ msgstr "Reimpression"
 #: messages.c:165
 msgid "Check the selected steel sheet:"
 msgstr "Verifier la tole d'acier installee:"
+
+#MSG_TUNE_MMU c=12
+#: messages.c:166
+msgid "Tune MMU"
+msgstr "Accorder MMU"

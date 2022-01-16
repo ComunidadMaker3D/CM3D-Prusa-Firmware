@@ -1056,3 +1056,6 @@
 
 #MSG_CHECK_STEEL_SHEET c=31
 "Check the selected steel sheet:"
+
+#MSG_TUNE_MMU c=8
+"Tune MMU"

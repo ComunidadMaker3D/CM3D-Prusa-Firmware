@@ -80,7 +80,7 @@ static uint8_t lcd_commands_step = 0;
 CustomMsg custom_message_type = CustomMsg::Status;
 unsigned int custom_message_state = 0;
 
-bool enableTuneMmuMenu = false;
+bool enableTuneMmuMenu = true;
 bool enableReprint = false;
 bool isPrintPaused = false;
 uint8_t farm_mode = 0;
@@ -5679,6 +5679,10 @@ static void lcd_settings_menu()
 
 	if (!PRINTER_ACTIVE || isPrintPaused)
     {
+		if (enableTuneMmuMenu)
+		{
+			MENU_ITEM_SUBMENU_P(_T(MSG_TUNE_MMU), lcd_tune_mmu);
+		}
 	    MENU_ITEM_SUBMENU_P(_i("Move axis"), lcd_move_menu_1mm);////MSG_MOVE_AXIS c=18
 	    MENU_ITEM_GCODE_P(_i("Disable steppers"), PSTR("M84"));////MSG_DISABLE_STEPPERS c=18
     }
@@ -6575,11 +6579,6 @@ static void lcd_main_menu()
 	  {	  //If the user remove the SD card the reprint will be disabled because you can't be sure that the gcode file will remain in the SD
 		  enableReprint = false; 
 	  }
-
-	if (!PRINTER_ACTIVE)
-	{
-		MENU_ITEM_SUBMENU_P(_i("Tune MMU"), lcd_tune_mmu);
-	}
 
     if ( ( IS_SD_PRINTING || is_usb_printing || (lcd_commands_type == LcdCommands::Layer1Cal)) && (current_position[Z_AXIS] < Z_HEIGHT_HIDE_LIVE_ADJUST_MENU) && !homing_flag && !mesh_bed_leveling_flag) {
         MENU_ITEM_SUBMENU_P(_T(MSG_BABYSTEP_Z), lcd_babystep_z);//8
