@@ -6576,7 +6576,7 @@ static void lcd_main_menu()
 		  enableReprint = false; 
 	  }
 
-	if ((enableTuneMmuMenu) && (!PRINTER_ACTIVE))
+	if (!PRINTER_ACTIVE)
 	{
 		MENU_ITEM_SUBMENU_P(_i("Tune MMU"), lcd_tune_mmu);
 	}
@@ -9107,6 +9107,7 @@ static void lcd_tune_mmu()
 static void lcd_switch_mmu_status(){
 	if(mmu_enabled){
 		mmu_enabled=false;
+		fsensor_autoload_set(false);
 	}else{
 		mmu_enabled=true;
 	}
