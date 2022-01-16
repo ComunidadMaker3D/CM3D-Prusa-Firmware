@@ -80,6 +80,7 @@ static uint8_t lcd_commands_step = 0;
 CustomMsg custom_message_type = CustomMsg::Status;
 unsigned int custom_message_state = 0;
 
+bool enableTuneMmuMenu = false;
 bool enableReprint = false;
 bool isPrintPaused = false;
 uint8_t farm_mode = 0;
@@ -275,6 +276,9 @@ static void lcd_sheet_menu();
 static void lcd_delta_calibrate_menu();
 #endif // DELTA_CALIBRATION_MENU
 
+/*CM3D functions*/
+static void lcd_tune_mmu();
+static void lcd_switch_mmu_status();
 
 /* Different types of actions that can be used in menu items. */
 static void menu_action_sdfile(const char* filename);
@@ -6572,6 +6576,11 @@ static void lcd_main_menu()
 		  enableReprint = false; 
 	  }
 
+	if ((enableTuneMmuMenu) && (!PRINTER_ACTIVE))
+	{
+		MENU_ITEM_SUBMENU_P(_i("Tune MMU"), lcd_tune_mmu);
+	}
+
     if ( ( IS_SD_PRINTING || is_usb_printing || (lcd_commands_type == LcdCommands::Layer1Cal)) && (current_position[Z_AXIS] < Z_HEIGHT_HIDE_LIVE_ADJUST_MENU) && !homing_flag && !mesh_bed_leveling_flag) {
         MENU_ITEM_SUBMENU_P(_T(MSG_BABYSTEP_Z), lcd_babystep_z);//8
     }
@@ -9053,6 +9062,64 @@ void reprint_from_eeprom() {
 	enquecommand(cmd);
 	lcd_return_to_status();
 }
+
+static void lcd_tune_mmu()
+{
+	typedef struct
+	{
+	    menu_data_edit_t reserved; //!< reserved for number editing functions
+		int8_t  status; //!< To recognize, whether the menu has been just initialized.
+		//! Backup of extrudemultiply, to recognize, that the value has been changed and
+		//! it needs to be applied.
+		int16_t extrudemultiply;
+	} _menu_data_t;
+	static_assert(sizeof(menu_data)>= sizeof(_menu_data_t),"_menu_data_t doesn't fit into menu_data");
+	_menu_data_t* _md = (_menu_data_t*)&(menu_data[0]);
+	if (_md->status == 0)
+	{
+		// Menu was entered. Mark the menu as entered and save the current extrudemultiply value.
+		_md->status = 1;
+		_md->extrudemultiply = extrudemultiply;
+	}
+	else if (_md->extrudemultiply != extrudemultiply)
+	{
+		// extrudemultiply has been changed from the child menu. Apply the new value.
+		_md->extrudemultiply = extrudemultiply;
+		calculate_extruder_multipliers();
+	}
+
+
+	MENU_BEGIN();
+	MENU_ITEM_BACK_P(_T(MSG_MAIN)); //1
+	//MENU_ITEM_EDIT_int3_P(_i("Nr Extruders"), &nrextrdrmmu, 5, 10);//2
+	if (mmu_enabled==true)
+	{
+		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_ON),lcd_switch_mmu_status);
+	}
+	else
+	{
+		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_OFF),lcd_switch_mmu_status);
+	}
+
+	MENU_END();
+}
+
+static void lcd_switch_mmu_status(){
+	if(mmu_enabled){
+		mmu_enabled=false;
+	}else{
+		mmu_enabled=true;
+	}
+	fSetMmuMode(mmu_enabled);
+}
+
+// int UserNrExtrudersMMU(){
+//     // Check if the value has been initialized or not
+//     if ( eeprom_read_byte((uint8_t *)EEPROM_NR_EXTRUDERS) >= 5 )
+// 	{
+// 		return 
+// 	}
+// }
 
 #ifdef PINDA_TEMP_COMP
 void lcd_pinda_temp_compensation_toggle()
