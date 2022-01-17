@@ -1754,3 +1754,8 @@ msgstr "Verifier la tole d'acier installee:"
 #: messages.c:166
 msgid "Choose the nozzle size:"
 msgstr "Choisissez la taille de la buse:"
+
+#MSG_TUNE_MMU c=12
+#: messages.c:166
+msgid "Tune MMU"
+msgstr "Accorder MMU"
