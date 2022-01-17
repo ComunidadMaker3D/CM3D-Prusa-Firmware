@@ -80,7 +80,7 @@ static uint8_t lcd_commands_step = 0;
 CustomMsg custom_message_type = CustomMsg::Status;
 unsigned int custom_message_state = 0;
 
-bool enableTuneMmuMenu = true;
+bool enableTuneMmuMenu = false;
 bool enableReprint = false;
 bool isPrintPaused = false;
 uint8_t farm_mode = 0;
@@ -1979,7 +1979,7 @@ static void lcd_support_menu()
       MENU_ITEM_BACK_P(PSTR("FW - " FW_version));
   }*/
       
-  MENU_ITEM_BACK_P(_n("Community EHV"));////MSG_PRUSA3D c=18
+  MENU_ITEM_BACK_P(_n("ComunidadMaker3D"));////MSG_PRUSA3D c=18
   MENU_ITEM_BACK_P(_n("forum.prusa3d.com"));////MSG_PRUSA3D_FORUM c=18
   MENU_ITEM_BACK_P(_n("howto.prusa3d.com"));////MSG_PRUSA3D_HOWTO c=18
   MENU_ITEM_BACK_P(STR_SEPARATOR);
