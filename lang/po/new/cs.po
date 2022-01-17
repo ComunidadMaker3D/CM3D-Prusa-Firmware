@@ -1769,3 +1769,8 @@ msgstr "Pocet mereni Z"
 #: messages.c:165
 msgid "Check the selected steel sheet:"
 msgstr "Zkontrolujte vybrany ocelovy plech:"
+
+#MSG_TUNE_MMU c=11
+#: messages.c:166
+msgid "Tune MMU"
+msgstr "Naladit MMU"

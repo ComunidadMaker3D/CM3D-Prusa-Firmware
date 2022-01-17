@@ -1774,3 +1774,8 @@ msgstr "Reimprimir"
 #: messages.c:165
 msgid "Check the selected steel sheet:"
 msgstr "Compruebe la plancha seleccionada:"
+
+#MSG_TUNE_MMU c=9
+#: messages.c:166
+msgid "Tune MMU"
+msgstr "Tuneo MMU"

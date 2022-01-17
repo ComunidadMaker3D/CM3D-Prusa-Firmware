@@ -1774,3 +1774,8 @@ msgstr "Ristampare"
 #: messages.c:161
 msgid "Check the selected steel sheet:"
 msgstr "Controllare la lamiera d'acciaio installata:"
+
+#MSG_TUNE_MMU c=16
+#: messages.c:166
+msgid "Tune MMU"
+msgstr "Sintonizzare MMU"
