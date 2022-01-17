@@ -1717,9 +1717,7 @@ void setup()
 
   fCheckModeInit();
   fSetMmuMode(mmu_enabled);
-  if (enableTuneMmuMenu){
-	  enableTuneMmuMenu = mmu_enabled;
-  }
+  fSetEnableTuneMMU(mmu_enabled);
   
   KEEPALIVE_STATE(NOT_BUSY);
 #ifdef WATCHDOG

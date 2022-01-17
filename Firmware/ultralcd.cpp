@@ -80,7 +80,7 @@ static uint8_t lcd_commands_step = 0;
 CustomMsg custom_message_type = CustomMsg::Status;
 unsigned int custom_message_state = 0;
 
-bool enableTuneMmuMenu = true;
+bool enableTuneMmuMenu = false;
 bool enableReprint = false;
 bool isPrintPaused = false;
 uint8_t farm_mode = 0;
