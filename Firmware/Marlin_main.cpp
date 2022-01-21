@@ -7075,7 +7075,10 @@ Sigma_Exit:
 	- U - Firmware version provided by G-code to be compared to current one.  
 	*/
 	case 115: // M115
-      steel_sheet_check();
+      if (IS_SD_PRINTING)
+      {
+        steel_sheet_check();
+      }
       if (code_seen('V')) {
           // Report the Prusa version number.
           SERIAL_PROTOCOLLNRPGM(FW_VERSION_STR_P());
