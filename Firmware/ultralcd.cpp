@@ -4936,6 +4936,11 @@ void lcd_wizard(WizState state)
 			if (wizard_event) state = S::IsFil;
 			else end = true;
 			break;
+		case S::SelectNozzle:
+			wizard_event = lcd_show_fullscreen_message_two_choices_wait_P(_T(MSG_CHOOSE_NOZZLE),false,true,MSG_NOZZLE_04,MSG_NOZZLE_06);
+			lcd_choose_nozzle_diameter(wizard_event);
+			state = S::IsFil;
+			break;
 		case S::Z:
 			lcd_show_fullscreen_message_and_wait_P(_i("Please remove shipping helpers first."));////MSG_REMOVE_SHIPPING_HELPERS c=20 r=3
 			lcd_show_fullscreen_message_and_wait_P(_i("Now remove the test print from steel sheet."));////MSG_REMOVE_TEST_PRINT c=20 r=4
@@ -7618,21 +7623,12 @@ static bool lcd_selfcheck_axis_sg(unsigned char axis) {
 	float axis_length, current_position_init, current_position_final;
 	float measured_axis_length[2];
 	float max_error_mm = 5;
-	#ifdef HEATBED_CS	
 	float margin = AXIS_MARGIN;
 	switch (axis) {
 	case 0: axis_length = X_MAX_POS; break;
 	case 1: axis_length = Y_MAX_POS + Y_OFFSET; break;
 	default: axis_length = Z_MAX_POS; break;
 	}
-	#else
-	float margin = 60;
-	switch (axis) {
-	case 0: axis_length = X_MAX_POS; break;
-	case 1: axis_length = Y_MAX_POS + 8; break;
-	default: axis_length = 210; break;
-	}
-	#endif
 
 	tmc2130_sg_stop_on_crash = false;
 	tmc2130_home_exit();
@@ -7694,6 +7690,9 @@ static bool lcd_selfcheck_axis_sg(unsigned char axis) {
 
 	for(uint_least8_t i = 0; i < 2; i++){ //check if measured axis length corresponds to expected length
 		printf_P(_N("Measured axis length:%.3f\n"), measured_axis_length[i]);
+		#ifdef HEATBED_CS
+		if (i==0) { max_error_mm = MAX_ERROR_X;} else { max_error_mm = MAX_ERROR_Y;}
+		#endif
 		if (fabs(measured_axis_length[i] - axis_length) > max_error_mm) {
 			enable_endstops(false);
 
@@ -9047,6 +9046,89 @@ void reprint_from_eeprom() {
   	sprintf_P(cmd, PSTR("M24"));
 	enquecommand(cmd);
 	lcd_return_to_status();
+}
+
+void lcd_choose_nozzle_diameter(int8_t nozzleSelection) {
+    uint16_t nDiameter;
+
+	if (!nozzleSelection)
+	{
+    	oNozzleDiameter=ClNozzleDiameter::_Diameter_600;
+    	nDiameter=600;
+	}else{
+		oNozzleDiameter=ClNozzleDiameter::_Diameter_400;
+    	nDiameter=400;
+	}
+	eeprom_update_byte((uint8_t*)EEPROM_NOZZLE_DIAMETER,(uint8_t)oNozzleDiameter);
+    eeprom_update_word((uint16_t*)EEPROM_NOZZLE_DIAMETER_uM,nDiameter);
+}
+
+
+//! @brief Show single screen message with yes and no possible choices and wait with possible timeout
+//! @param msg Message to show
+//! @param allow_timeouting if true, allows time outing of the screen
+//! @param default_first if true, first choice is selected by default, otherwise second choice is preselected
+//! @param first_choice first message
+//! @param second_choice second message
+//! @retval 1 first choice selected by user
+//! @retval 0 second choice selected by user
+//! @retval -1 screen timed out
+int8_t lcd_show_fullscreen_message_two_choices_wait_P(const char *msg, bool allow_timeouting, bool default_first,
+        const char *first_choice, const char *second_choice)
+{
+
+	lcd_display_message_fullscreen_P(msg);
+	
+	if (default_first) {
+		lcd_putc_at(0, 2, '>');
+		lcd_puts_P(first_choice);
+		lcd_puts_at_P(1, 3, second_choice);
+	}
+	else {
+		lcd_puts_at_P(1, 2, first_choice);
+		lcd_putc_at(0, 3, '>');
+		lcd_puts_P(second_choice);
+	}
+	int8_t retval = default_first ? true : false;
+
+	// Wait for user confirmation or a timeout.
+	unsigned long previous_millis_cmd = _millis();
+	int8_t        enc_dif = lcd_encoder_diff;
+	lcd_consume_click();
+	KEEPALIVE_STATE(PAUSED_FOR_USER);
+	for (;;) {
+		if (allow_timeouting && _millis() - previous_millis_cmd > LCD_TIMEOUT_TO_STATUS)
+		{
+		    retval = -1;
+		    break;
+		}
+		manage_heater();
+		manage_inactivity(true);
+		if (abs(enc_dif - lcd_encoder_diff) > 4) {
+			lcd_set_cursor(0, 2);
+				if (enc_dif < lcd_encoder_diff && retval) {
+					lcd_print(' ');
+					lcd_putc_at(0, 3, '>');
+					retval = 0;
+					Sound_MakeSound(e_SOUND_TYPE_EncoderMove);
+
+				}
+				else if (enc_dif > lcd_encoder_diff && !retval) {
+					lcd_print('>');
+					lcd_putc_at(0, 3, ' ');
+					retval = 1;
+					Sound_MakeSound(e_SOUND_TYPE_EncoderMove);
+				}
+				enc_dif = lcd_encoder_diff;
+		}
+		if (lcd_clicked()) {
+			Sound_MakeSound(e_SOUND_TYPE_ButtonEcho);
+			KEEPALIVE_STATE(IN_HANDLER);
+			break;
+		}
+	}
+    lcd_encoder_diff = 0;
+    return retval;
 }
 
 #ifdef PINDA_TEMP_COMP

@@ -1744,3 +1744,8 @@ msgstr "IP adr. tiskarny:"
 #: messages.c:165
 msgid "Check the selected steel sheet:"
 msgstr "Zkontrolujte vybrany ocelovy plech:"
+
+#MSG_CHOOSE_NOZZLE c=24 r=2
+#: messages.c:166
+msgid "Choose the nozzle size:"
+msgstr "Vyberte velikost trysky:"

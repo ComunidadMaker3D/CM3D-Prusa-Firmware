@@ -1385,3 +1385,7 @@
 #MSG_CHECK_STEEL_SHEET c=35
 "Check the selected steel sheet:"
 "Verifier la tole d'acier installee:"
+
+#MSG_CHOOSE_NOZZLE c=32
+"Choose the nozzle size:"
+"Choisissez la taille de la buse:"

@@ -1747,5 +1747,10 @@ msgstr "Ristampare"
 
 #MSG_CHECK_STEEL_SHEET c=44
 #: messages.c:161
-msgid "Check the steel sheet installed"
-msgstr "Controllare la lamiera d'acciaio installata"
+msgid "Check the selected steel sheet:"
+msgstr "Controllare la lamiera d'acciaio installata:"
+
+#MSG_CHOOSE_NOZZLE c=33 r=2
+#: messages.c:166
+msgid "Choose the nozzle size:"
+msgstr "Scegli la dimensione dellugello:"

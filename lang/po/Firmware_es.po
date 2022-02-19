@@ -1747,5 +1747,10 @@ msgstr "Reimprimir"
 
 #MSG_CHECK_STEEL_SHEET c=34 r=2
 #: messages.c:165
-msgid "Check the steel sheet installed"
-msgstr "Comprueba la plancha instalada"
+msgid "Check the selected steel sheet:"
+msgstr "Compruebe la plancha seleccionada:"
+
+#MSG_CHOOSE_NOZZLE c=29 r=2
+#: messages.c:166
+msgid "Choose the nozzle size:"
+msgstr "Elige el diametro del nozzle:"

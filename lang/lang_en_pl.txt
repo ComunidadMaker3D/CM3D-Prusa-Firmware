@@ -1385,3 +1385,7 @@
 # MSG_CHECK_STEEL_SHEET c=31
 "Check the selected steel sheet:"
 "Sprawdz wybrana blache stalowa:"
+
+#MSG_CHOOSE_NOZZLE c=29
+"Choose the nozzle size:"
+"Wybierz rozmiar dyszy:"

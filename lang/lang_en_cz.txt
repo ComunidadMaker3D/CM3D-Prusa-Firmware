@@ -1381,3 +1381,7 @@
 #MSG_CHECK_STEEL_SHEET c=35
 "Check the selected steel sheet:"
 "Zkontrolujte vybrany ocelovy plech:"
+
+#MSG_CHOOSE_NOZZLE c=24
+"Choose the nozzle size:"
+"Vyberte velikost trysky:"

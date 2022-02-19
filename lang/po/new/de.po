@@ -1749,3 +1749,8 @@ msgstr "Abdruck"
 #: messages.c:165
 msgid "Check the selected steel sheet:"
 msgstr "Uberprufen Sie das installierte Stahlblech:"
+
+#MSG_CHOOSE_NOZZLE c=26 r=2
+#: messages.c:166
+msgid "Choose the nozzle size:"
+msgstr "Wahlen Sie die Dusengroße:"

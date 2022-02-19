@@ -56,16 +56,7 @@ const float bed_skew_angle_extreme = (0.25f * M_PI / 180.f);
 // Positions of the bed reference points in the machine coordinates, referenced to the P.I.N.D.A sensor.
 // The points are ordered in a zig-zag fashion to speed up the calibration.
 
-#ifdef HEATBED_V2
-
-/**
- * [0,0] bed print area point X coordinate in bed coordinates ver. 05d/24V
- */
-#define BED_PRINT_ZERO_REF_X 2.f
-/**
- * [0,0] bed print area point Y coordinate in bed coordinates ver. 05d/24V
- */
-#define BED_PRINT_ZERO_REF_Y 9.4f
+#if defined(HEATBED_V2) || defined(HEATBED_CS)
 
 /**
  * @brief Positions of the bed reference points in print area coordinates. ver. 05d/24V
@@ -76,29 +67,6 @@ const float bed_skew_angle_extreme = (0.25f * M_PI / 180.f);
  * MK2: center front, center right, center rear, center left.
  * MK25 and MK3: front left, front right, rear right, rear left
  */
-const float bed_ref_points_4[] PROGMEM = {
-	37.f - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_X,
-	18.4f - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y,
-
-	245.f - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER  - SHEET_PRINT_ZERO_REF_X,
-	18.4f - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y,
-
-	245.f - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER  - SHEET_PRINT_ZERO_REF_X,
-	210.4f - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y,
-
-	37.f - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER  - SHEET_PRINT_ZERO_REF_X,
-	210.4f - BED_PRINT_ZERO_REF_Y - Y_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_Y
-};
-#elif defined(HEATBED_CS) //CustomSize
-
-/**
- * [0,0] bed print area point X coordinate in bed coordinates ver. 05d/24V
- */
-#define BED_PRINT_ZERO_REF_X 2.f
-/**
- * [0,0] bed print area point Y coordinate in bed coordinates ver. 05d/24V
- */
-#define BED_PRINT_ZERO_REF_Y 9.4f
 
 const float bed_ref_points_4[] PROGMEM = {
 	FL_CAL_POINT_X_POSITION - BED_PRINT_ZERO_REF_X - X_PROBE_OFFSET_FROM_EXTRUDER - SHEET_PRINT_ZERO_REF_X,
@@ -135,7 +103,7 @@ static inline bool point_on_1st_row(const uint8_t /*i*/)
 {
 	return false;
 }
-#else //HEATBED_V2
+#else //HEATBED_V2 or HEATBED_CS
 static inline bool point_on_1st_row(const uint8_t i)
 {
 	return (i < 3);
@@ -2344,7 +2312,7 @@ BedSkewOffsetDetectionResultType find_bed_offset_and_skew(int8_t verbosity_level
         }
 
 #ifndef NEW_XYZCAL
-#if !defined(HEATBED_V2) || !defined(HEATBED_CS)
+#if defined(HEATBED_V2) || defined(HEATBED_CS)
 		
 			if (k == 0 || k == 1) {
 				// Improve the position of the 1st row sensor points by a zig-zag movement.
@@ -2365,7 +2333,7 @@ BedSkewOffsetDetectionResultType find_bed_offset_and_skew(int8_t verbosity_level
 					// not found
 					return BED_SKEW_OFFSET_DETECTION_POINT_NOT_FOUND;
 			}
-#endif //HEATBED_V2
+#endif //HEATBED_V2 or HEATBED_CS
 #endif
 			#ifdef SUPPORT_VERBOSITY
 			if (verbosity_level >= 10)

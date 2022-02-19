@@ -242,6 +242,7 @@ enum class WizState : uint8_t
     Restore,        //!< restore calibration status
     Selftest,       //!< self test
     Xyz,            //!< xyz calibration
+    SelectNozzle,   //!< Select the nozzle size
     Z,              //!< z calibration
     IsFil,          //!< Is filament loaded? First step of 1st layer calibration
     PreheatPla,     //!< waiting for preheat nozzle for PLA
@@ -260,6 +261,9 @@ void lcd_wizard(WizState state);
 extern void lcd_experimental_toggle();
 extern void lcd_experimental_menu();
 void reprint_from_eeprom();
+void lcd_choose_nozzle_diameter(int8_t nozzleSelection);
+int8_t lcd_show_fullscreen_message_two_choices_wait_P(const char *msg, bool allow_timeouting, bool default_first, 
+const char *first_choice, const char *second_choice);
 
 #ifdef PINDA_TEMP_COMP
 extern void lcd_pinda_temp_compensation_toggle();
