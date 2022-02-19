@@ -1409,3 +1409,7 @@
 #MSG_CHECK_STEEL_SHEET c=43
 "Check the selected steel sheet:"
 "Uberprufen Sie das installierte Stahlblech:"
+
+#MSG_CHOOSE_NOZZLE c=26
+"Choose the nozzle size:"
+"Wahlen Sie die Dusengroße:"

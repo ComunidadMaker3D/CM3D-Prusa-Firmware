@@ -1774,3 +1774,8 @@ msgstr "Przedruk"
 #: messages.c:165
 msgid "Check the selected steel sheet:"
 msgstr "Sprawdz wybrana blache stalowa:"
+
+#MSG_CHOOSE_NOZZLE c=29 r=2
+#: messages.c:166
+msgid "Choose the nozzle size:"
+msgstr "Wybierz rozmiar dyszy:"

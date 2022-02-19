@@ -168,6 +168,9 @@ extern const char MSG_IR_04_OR_NEWER[];
 extern const char MSG_IR_03_OR_OLDER[];
 extern const char MSG_IR_UNKNOWN[];
 #endif
+extern const char MSG_CHECK_STEEL_SHEET[];
+extern const char MSG_REPRINT[];
+extern const char MSG_CHOOSE_NOZZLE[];
 
 //not internationalized messages
 extern const char MSG_BROWNOUT_RESET[];
@@ -205,8 +208,8 @@ extern const char MSG_ADVANCE_K[];
 extern const char MSG_POWERPANIC_DETECTED[];
 extern const char MSG_LCD_STATUS_CHANGED[];
 extern const char MSG_UNKNOWN_CODE[];
-extern const char MSG_CHECK_STEEL_SHEET[];
-extern const char MSG_REPRINT[];
+extern const char MSG_NOZZLE_06[];
+extern const char MSG_NOZZLE_04[];
 
 #if defined(__cplusplus)
 }

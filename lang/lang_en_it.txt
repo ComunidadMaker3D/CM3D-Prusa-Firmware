@@ -1409,3 +1409,7 @@
 #MSG_CHECK_STEEL_SHEET c=44
 "Check the selected steel sheet:"
 "Controllare la lamiera d'acciaio installata:"
+
+#MSG_CHOOSE_NOZZLE c=33
+"Choose the nozzle size:"
+"Scegli la dimensione dellugello:"

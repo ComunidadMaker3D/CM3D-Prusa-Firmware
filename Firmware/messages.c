@@ -166,6 +166,7 @@ const char MSG_IR_UNKNOWN[] PROGMEM_I1 = ISTR("unknown state");////c=18
 #endif
 const char MSG_REPRINT[] PROGMEM_I1 = ISTR("Reprint"); ////c=7
 const char MSG_CHECK_STEEL_SHEET[] PROGMEM_I1 = ISTR("Check the selected steel sheet:"); ////c=31
+const char MSG_CHOOSE_NOZZLE[] PROGMEM_I1 = ISTR("Choose the nozzle size:"); ////c=23
 
 
 //not internationalized messages
@@ -208,4 +209,5 @@ const char MSG_ADVANCE_K[] PROGMEM_N1 = "Advance K:"; ////c=13
 const char MSG_POWERPANIC_DETECTED[] PROGMEM_N1 = "POWER PANIC DETECTED"; ////c=20
 const char MSG_LCD_STATUS_CHANGED[] PROGMEM_N1 = "LCD status changed";
 const char MSG_UNKNOWN_CODE[] PROGMEM_N1 = "Unknown %c code: %s\n";
-
+const char MSG_NOZZLE_06[] PROGMEM_N1 = "0.6mm";
+const char MSG_NOZZLE_04[] PROGMEM_N1 = "0.4mm";
