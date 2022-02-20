@@ -1779,3 +1779,8 @@ msgstr "Compruebe la plancha seleccionada:"
 #: messages.c:166
 msgid "Choose the nozzle size:"
 msgstr "Elige el diametro del nozzle:"
+
+#MSG_TUNE_MMU c=9
+#: messages.c:167
+msgid "Tune MMU"
+msgstr "Tuneo MMU"

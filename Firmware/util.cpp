@@ -505,6 +505,10 @@ else {
      }
 }
 
+void fSetEnableTuneMMU(bool bMMu)
+{
+     enableTuneMmuMenu=bMMu;
+}
 
 void ip4_to_str(char* dest, uint8_t* IP)
 {

@@ -167,6 +167,7 @@ const char MSG_IR_UNKNOWN[] PROGMEM_I1 = ISTR("unknown state");////c=18
 const char MSG_REPRINT[] PROGMEM_I1 = ISTR("Reprint"); ////c=7
 const char MSG_CHECK_STEEL_SHEET[] PROGMEM_I1 = ISTR("Check the selected steel sheet:"); ////c=31
 const char MSG_CHOOSE_NOZZLE[] PROGMEM_I1 = ISTR("Choose the nozzle size:"); ////c=23
+const char MSG_TUNE_MMU[] PROGMEM_I1 = ISTR("Tune MMU"); ////c=8
 
 
 //not internationalized messages

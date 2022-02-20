@@ -1413,3 +1413,7 @@
 #MSG_CHOOSE_NOZZLE c=29
 "Choose the nozzle size:"
 "Elige el diametro del nozzle:"
+
+#MSG_TUNE_MMU c=9
+"Tune MMU"
+"Tuneo MMU"

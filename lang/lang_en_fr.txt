@@ -1413,3 +1413,7 @@
 #MSG_CHOOSE_NOZZLE c=32
 "Choose the nozzle size:"
 "Choisissez la taille de la buse:"
+
+#MSG_TUNE_MMU c=12
+"Tune MMU"
+"Accorder MMU"

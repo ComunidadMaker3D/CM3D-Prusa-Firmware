@@ -272,6 +272,7 @@ void mmu_loop(void)
             //-//
             // ... PrinterType/Name
             fSetMmuMode(true);
+			fSetEnableTuneMMU(true);
 			mmu_state = S::Idle;
 		}
 		return;
