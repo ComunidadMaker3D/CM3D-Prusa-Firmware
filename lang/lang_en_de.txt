@@ -1390,6 +1390,6 @@
 "Choose the nozzle size:"
 "Wahlen Sie die Dusengroße:"
 
-#MSG_TUNE_MMU c=7
+#MSG_TUNE_MMU c=8
 "Tune MMU"
-"Tun MMU"
+"Tune MMU"

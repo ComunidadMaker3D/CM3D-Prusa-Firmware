@@ -1755,7 +1755,7 @@ msgstr "Uberprufen Sie das installierte Stahlblech:"
 msgid "Choose the nozzle size:"
 msgstr "Wahlen Sie die Dusengroße:"
 
-#MSG_TUNE_MMU c=7
-#: messages.c:166
+#MSG_TUNE_MMU c=8
+#: messages.c:167
 msgid "Tune MMU"
-msgstr "Tun MMU"
+msgstr "Tune MMU"
