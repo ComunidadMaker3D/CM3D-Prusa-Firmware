@@ -193,6 +193,7 @@ int extruder_multiply[EXTRUDERS] = {100
 
 int bowden_length[4] = {385, 385, 385, 385};
 
+bool sheet_alert_enabled = true;
 bool is_usb_printing = false;
 bool homing_flag = false;
 

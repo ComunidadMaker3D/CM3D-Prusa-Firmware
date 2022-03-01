@@ -284,6 +284,8 @@ static void lcd_switch_mmu_status();
 static void menu_action_sdfile(const char* filename);
 static void menu_action_sddirectory(const char* filename);
 
+static void lcd_set_sheet_alert();
+
 #define ENCODER_FEEDRATE_DEADZONE 10
 
 #define STATE_NA 255
@@ -5682,6 +5684,8 @@ static void lcd_settings_menu()
 
 	MENU_ITEM_TOGGLE_P(_T(MSG_FANS_CHECK), fans_check_enabled ? _T(MSG_ON) : _T(MSG_OFF), lcd_set_fan_check);
 
+	MENU_ITEM_TOGGLE_P(_I("Sheet Alert"), sheet_alert_enabled ? _T(MSG_ON) : _T(MSG_OFF), lcd_set_sheet_alert);
+
 	SETTINGS_SILENT_MODE;
 
     if(!farm_mode)
@@ -9197,6 +9201,11 @@ static void lcd_switch_mmu_status(){
 // 		return 
 // 	}
 // }
+
+void lcd_set_sheet_alert() {
+	sheet_alert_enabled = !sheet_alert_enabled;
+	eeprom_update_byte((uint8_t *)EEPROM_ED_SHEET_ALERT, sheet_alert_enabled);
+}
 
 #ifdef PINDA_TEMP_COMP
 void lcd_pinda_temp_compensation_toggle()
