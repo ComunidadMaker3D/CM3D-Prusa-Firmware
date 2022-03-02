@@ -1715,7 +1715,8 @@ void setup()
   fCheckModeInit();
   fSetMmuMode(mmu_enabled);
   fSetEnableTuneMMU(mmu_enabled);
-  
+  SetSheetAlert();
+
   KEEPALIVE_STATE(NOT_BUSY);
 #ifdef WATCHDOG
   wdt_enable(WDTO_4S);
@@ -7064,7 +7065,7 @@ Sigma_Exit:
 	- U - Firmware version provided by G-code to be compared to current one.  
 	*/
 	case 115: // M115
-      if (IS_SD_PRINTING)
+      if (IS_SD_PRINTING && sheet_alert_enabled)
       {
         steel_sheet_check();
       }
@@ -12246,3 +12247,7 @@ tmc2130_init(TMCInitParams(true, FarmOrUserECool()));
 WRITE(Z_ENABLE_PIN,Z_ENABLE_ON);                  // slightly redundant ;-p
 }
 #endif // PSU_Delta
+
+void SetSheetAlert() {
+	sheet_alert_enabled = eeprom_read_byte((uint8_t *)EEPROM_ED_SHEET_ALERT);
+}

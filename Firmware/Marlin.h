@@ -439,6 +439,7 @@ extern void stop_and_save_print_to_ram(float z_move, float e_move);
 extern void restore_print_from_ram_and_continue(float e_move);
 extern void cancel_saved_printing();
 
+void SetSheetAlert(); 
 
 //estimated time to end of the print
 extern uint8_t calc_percent_done();
