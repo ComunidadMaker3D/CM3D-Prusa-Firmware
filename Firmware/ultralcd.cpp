@@ -9176,7 +9176,6 @@ static void lcd_tune_mmu()
 
 	MENU_BEGIN();
 	MENU_ITEM_BACK_P(_T(MSG_MAIN)); //1
-	//MENU_ITEM_EDIT_int3_P(_i("Nr Extruders"), &nrextrdrmmu, 5, 10);//2
 	if (mmu_enabled==true)
 	{
 		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_ON),lcd_switch_mmu_status);
@@ -9185,6 +9184,7 @@ static void lcd_tune_mmu()
 	{
 		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_OFF),lcd_switch_mmu_status);
 	}
+	//MENU_ITEM_EDIT_int3_P(_i("Nr Extruders"), &nrextrdrmmu, 5, 10);//2
 
 	MENU_END();
 }
