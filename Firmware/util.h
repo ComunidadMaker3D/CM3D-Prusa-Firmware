@@ -109,6 +109,7 @@ void fw_version_check(const char *pVersion);
 void gcode_level_check(uint16_t nGcodeLevel);
 
 void fSetMmuMode(bool bMMu);
+void SetMmuExtruders() ;
 void steel_sheet_check();
 void fSetEnableTuneMMU(bool bMMu);
 

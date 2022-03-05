@@ -328,8 +328,8 @@ static_assert(sizeof(Sheets) == EEPROM_SHEETS_SIZEOF, "Sizeof(Sheets) is not EEP
 | 0x0D04 3332		| uint8_t	| EEPROM_ECOOL_ENABLE					| ffh 255		| ^						| Disable extruder motor scaling for non-farm print	| LCD menu		| D3 Ax0d04 C1
 | ^					| ^			| ^										| 2ah 42		| ^						| Enable extruder motor scaling for non-farm print	| ^				| D3 Ax0d04 C1
 | 0x0D03 3321		| uint8_t	| EEPROM_FW_CRASH_FLAG					| 01h 1			| ff/00					| Last FW crash reason (dump_crash_reason)			| D21/D22		| D3 Ax0d03 C1
-| 0x0D02 3320		| uint8_t   | EEPROM_ED_SHEET_ALERT					| 00h 0			| ffh 255				| Disable sheet alert: __off__						| LCD menu      | D3 Ax0d03 C1
-
+| 0x0D02 3320		| uint8_t   | EEPROM_ED_SHEET_ALERT					| 00h 0			| ffh 255				| Disable sheet alert: __on__						| LCD menu      | D3 Ax0d03 C1
+| 0x0D01 3319	    | uint16_t   | EEPROM_MMU_NR_EXTRUDERS				| 00h 0			| ffh 255				| Nr of extruders: __off__					    	| LCD menu      | D3 Ax0d03 C1
 | Address begin		| Bit/Type 	| Name 									| Valid values	| Default/FactoryReset	| Description 										| Gcode/Function| Debug code
 | :--:				| :--: 		| :--: 									| :--:			| :--:					| :--:												| :--:			| :--:
 | 0x0012 18			| uint16	| EEPROM_FIRMWARE_VERSION_END			| ???			| ff ffh 65535			| ???												| ???			| D3 Ax0012 C2
@@ -546,9 +546,10 @@ static Sheets * const EEPROM_Sheets_base = (Sheets*)(EEPROM_SHEETS_BASE);
 #define EEPROM_FW_CRASH_FLAG (EEPROM_ECOOL_ENABLE-1) // uint8_t
 
 #define EEPROM_ED_SHEET_ALERT (EEPROM_FW_CRASH_FLAG-1)
+#define EEPROM_MMU_NR_EXTRUDERS (EEPROM_ED_SHEET_ALERT-2)
 
 //This is supposed to point to last item to allow EEPROM overrun check. Please update when adding new items.
-#define EEPROM_LAST_ITEM EEPROM_ED_SHEET_ALERT
+#define EEPROM_LAST_ITEM EEPROM_MMU_NR_EXTRUDERS
 // !!!!!
 // !!!!! this is end of EEPROM section ... all updates MUST BE inserted before this mark !!!!!
 // !!!!!

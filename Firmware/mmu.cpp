@@ -1224,6 +1224,7 @@ void extr_adj_4()
 void load_all()
 {
 #ifndef SNMM
+//crear matriz estática y bucle con el maximo de extrusores
 	enquecommand_P(PSTR("M701 E0"));
 	enquecommand_P(PSTR("M701 E1"));
 	enquecommand_P(PSTR("M701 E2"));

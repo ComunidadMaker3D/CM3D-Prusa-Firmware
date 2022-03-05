@@ -117,6 +117,9 @@ extern bool menu_item_leave();
 #define MENU_ITEM_FUNCTION_P(str, func) do { if (menu_item_function_P(str, func)) return; } while (0)
 extern uint8_t menu_item_function_P(const char* str, menu_func_t func);
 
+#define MENU_ITEM_FUNCTION_FN_P(str, func, fn_par) do { if (menu_item_function_P(str, func, fn_par)) return; } while (0)
+extern uint8_t menu_item_function_P(const char* str, void (*func)(uint8_t), uint8_t fn_par);
+
 #define MENU_ITEM_FUNCTION_NR_P(str, number, func, fn_par) do { if (menu_item_function_P(str, number, func, fn_par)) return; } while (0)
 extern uint8_t menu_item_function_P(const char* str, char number, void (*func)(uint8_t), uint8_t fn_par);
 

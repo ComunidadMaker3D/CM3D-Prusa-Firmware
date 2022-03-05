@@ -508,6 +508,13 @@ else {
 void fSetEnableTuneMMU(bool bMMu)
 {
      enableTuneMmuMenu=bMMu;
+     if(bMMu){
+          SetMmuExtruders();
+     }
+}
+
+void SetMmuExtruders() {
+	mmu_nr_extruders = eeprom_read_word((uint16_t *)EEPROM_MMU_NR_EXTRUDERS);
 }
 
 void ip4_to_str(char* dest, uint8_t* IP)
