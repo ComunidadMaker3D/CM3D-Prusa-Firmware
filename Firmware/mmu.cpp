@@ -279,7 +279,7 @@ void mmu_loop(void)
 	case S::Idle:
 		if (mmu_cmd != MmuCmd::None) //command request ?
 		{
-			if ((mmu_cmd >= MmuCmd::T0) && (mmu_cmd <= MmuCmd::T4))
+			if ((mmu_cmd >= MmuCmd::T0) && (mmu_cmd <= MmuCmd::T9))
 			{
 				const uint8_t filament = mmu_cmd - MmuCmd::T0;
 				DEBUG_PRINTF_P(PSTR("MMU <= 'T%d'\n"), filament);
@@ -288,7 +288,7 @@ void mmu_loop(void)
 				mmu_fil_loaded = true;
 				mmu_idl_sens = 1;
 			}
-			else if ((mmu_cmd >= MmuCmd::L0) && (mmu_cmd <= MmuCmd::L4))
+			else if ((mmu_cmd >= MmuCmd::L0) && (mmu_cmd <= MmuCmd::L9))
 			{
 			    const uint8_t filament = mmu_cmd - MmuCmd::L0;
 			    DEBUG_PRINTF_P(PSTR("MMU <= 'L%d'\n"), filament);
@@ -309,7 +309,7 @@ void mmu_loop(void)
 				mmu_fil_loaded = false;
 				mmu_state = S::WaitCmd;
 			}
-			else if ((mmu_cmd >= MmuCmd::E0) && (mmu_cmd <= MmuCmd::E4))
+			else if ((mmu_cmd >= MmuCmd::E0) && (mmu_cmd <= MmuCmd::E9))
 			{
 			    const uint8_t filament = mmu_cmd - MmuCmd::E0;
 				DEBUG_PRINTF_P(PSTR("MMU <= 'E%d'\n"), filament);
@@ -317,7 +317,7 @@ void mmu_loop(void)
 				mmu_fil_loaded = false;
 				mmu_state = S::WaitCmd;
 			}
-			else if ((mmu_cmd >= MmuCmd::K0) && (mmu_cmd <= MmuCmd::K4))
+			else if ((mmu_cmd >= MmuCmd::K0) && (mmu_cmd <= MmuCmd::K9))
             {
                 const uint8_t filament = mmu_cmd - MmuCmd::K0;
                 DEBUG_PRINTF_P(PSTR("MMU <= 'K%d'\n"), filament);
@@ -516,7 +516,7 @@ int8_t mmu_set_filament_type(uint8_t extruder, uint8_t filament)
 //! If T or L command is enqueued, it marks filament loaded in AutoDeplete module.
 void mmu_command(MmuCmd cmd)
 {
-	if ((cmd >= MmuCmd::T0) && (cmd <= MmuCmd::T4))
+	if ((cmd >= MmuCmd::T0) && (cmd <= MmuCmd::T9))
 	{
 		//disable extruder motor
 #ifdef TMC2130
@@ -525,7 +525,7 @@ void mmu_command(MmuCmd cmd)
 		//printf_P(PSTR("E-axis disabled\n"));
 		ad_markLoaded(cmd - MmuCmd::T0);
 	}
-    if ((cmd >= MmuCmd::L0) && (cmd <= MmuCmd::L4))
+    if ((cmd >= MmuCmd::L0) && (cmd <= MmuCmd::L9))
     {
         ad_markLoaded(cmd - MmuCmd::L0);
     }
@@ -656,7 +656,7 @@ bool mmu_get_response(uint8_t move)
 //! which is constantly updated with nozzle temperature.
 void mmu_wait_for_heater_blocking()
 {
-    while ((degTargetHotend(active_extruder) - degHotend(active_extruder)) > 5)
+    while ((degTargetHotend(active_extruder) - degHotend(active_extruder)) > 10)
     {
         delay_keep_alive(1000);
         lcd_wait_for_heater();
@@ -755,7 +755,7 @@ void manage_response(bool move_axes, bool turn_off_nozzle, uint8_t move)
 			  {
 				lcd_clear();
 				setTargetHotend(hotend_temp_bckp, active_extruder);
-				if (((degTargetHotend(active_extruder) - degHotend(active_extruder)) > 5)) {
+				if (((degTargetHotend(active_extruder) - degHotend(active_extruder)) > 10)) {
 					lcd_display_message_fullscreen_P(_i("MMU OK. Resuming temperature..."));
 					delay_keep_alive(3000);
 				}
@@ -982,7 +982,7 @@ void extr_adj(uint8_t extruder) //loading filament for SNMM
 {
 #ifndef SNMM
     MmuCmd cmd = MmuCmd::L0 + extruder;
-    if (extruder > (MmuCmd::L4 - MmuCmd::L0))
+    if (extruder > (MmuCmd::L9 - MmuCmd::L0))
     {
         printf_P(PSTR("Filament out of range %d \n"),extruder);
         return;
@@ -1224,12 +1224,35 @@ void extr_adj_4()
 void load_all()
 {
 #ifndef SNMM
-//crear matriz estática y bucle con el maximo de extrusores
-	enquecommand_P(PSTR("M701 E0"));
-	enquecommand_P(PSTR("M701 E1"));
-	enquecommand_P(PSTR("M701 E2"));
-	enquecommand_P(PSTR("M701 E3"));
-	enquecommand_P(PSTR("M701 E4"));
+	static const char load_filament_mmu_1[] PROGMEM = "M701 E0";
+    static const char load_filament_mmu_2[] PROGMEM = "M701 E1";
+    static const char load_filament_mmu_3[] PROGMEM = "M701 E2";
+    static const char load_filament_mmu_4[] PROGMEM = "M701 E3";
+    static const char load_filament_mmu_5[] PROGMEM = "M701 E4";
+    static const char load_filament_mmu_6[] PROGMEM = "M701 E5";
+    static const char load_filament_mmu_7[] PROGMEM = "M701 E6";
+    static const char load_filament_mmu_8[] PROGMEM = "M701 E7";
+    static const char load_filament_mmu_9[] PROGMEM = "M701 E8";
+    static const char load_filament_mmu_10[] PROGMEM = "M701 E9";
+
+    static const char * const load_all_filament_mmu_cmd[] PROGMEM =
+    {
+        load_filament_mmu_1,
+        load_filament_mmu_2,
+        load_filament_mmu_3,
+        load_filament_mmu_4,
+        load_filament_mmu_5,
+        load_filament_mmu_6,
+        load_filament_mmu_7,
+        load_filament_mmu_8,
+        load_filament_mmu_9,
+        load_filament_mmu_10,
+    };
+
+    for (uint8_t i = 0; i < mmu_nr_extruders; ++i)
+    {
+            enquecommand_P(static_cast<char*>(pgm_read_ptr(&load_all_filament_mmu_cmd[i])));
+    }
 #else
 	for (int i = 0; i < 4; i++)
 	{
@@ -1404,7 +1427,7 @@ void mmu_eject_filament(uint8_t filament, bool recover)
 {
 //-//
 bFilamentAction=false;                            // NOT in "mmu_fil_eject_menu()"
-	if (filament < 5) 
+	if (filament < mmu_nr_extruders-1) 
 	{
 
 		if (degHotend0() > EXTRUDE_MINTEMP)

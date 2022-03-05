@@ -4717,7 +4717,7 @@ void lcd_v2_calibration()
 	    const uint8_t filament = choose_menu_P(
             _i("Select filament:"), ////MSG_SELECT_FILAMENT c=20
             _T(MSG_FILAMENT),(_T(MSG_CANCEL)+1)); //Hack to reuse MSG but strip 1st char off
-	    if (filament < 5)
+	    if (filament < mmu_nr_extruders)
 	    {
 	        lay1cal_filament = filament;
 	    }
@@ -9181,7 +9181,7 @@ static void lcd_tune_mmu()
 	{
 		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_OFF),lcd_switch_mmu_status);
 	}
-	MENU_ITEM_EDIT_int3_P(_i("Nr Extruders"), &mmu_nr_extruders, 0, 10);
+	MENU_ITEM_EDIT_int3_P(_i("Nr Extruders"), &mmu_nr_extruders, 5, 10);
 	lcd_set_mmu_nr_extruders();
 	MENU_END();
 }
