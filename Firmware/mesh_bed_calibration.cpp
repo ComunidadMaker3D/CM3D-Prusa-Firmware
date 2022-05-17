@@ -34,7 +34,13 @@ float   world2machine_shift[2];
 #define MACHINE_AXIS_SCALE_X 1.f
 #define MACHINE_AXIS_SCALE_Y 1.f
 
-#define BED_CALIBRATION_POINT_OFFSET_MAX_EUCLIDIAN  (0.8f)
+//Due to the Y axis limitations of bearmera 
+#if defined(BEARMERA)
+    #define BED_CALIBRATION_POINT_OFFSET_MAX_EUCLIDIAN  (2.2f)
+#else 
+    #define BED_CALIBRATION_POINT_OFFSET_MAX_EUCLIDIAN  (0.8f)
+#endif //BEARMERA
+
 #define BED_CALIBRATION_POINT_OFFSET_MAX_1ST_ROW_X  (0.8f)
 #define BED_CALIBRATION_POINT_OFFSET_MAX_1ST_ROW_Y  (1.5f)
 
