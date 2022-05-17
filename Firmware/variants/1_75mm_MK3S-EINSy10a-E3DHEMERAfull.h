@@ -705,7 +705,7 @@
 #define RL_CAL_POINT_X_POSITION 37.f
 #define RL_CAL_POINT_Y_POSITION 210.4f
 
-#define Y_OFFSET 8
+#define Y_OFFSET 12
 #define AXIS_MARGIN 60
 
 #define MAX_ERROR_X 5
