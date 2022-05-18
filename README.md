@@ -1,3 +1,13 @@
+# Add-on features 
+
+* **Reprint** option, there is no need to navigate to the g-code anymore,just select on REPRINT.
+* **SteelSheet alert** If you have more than 1 steel sheet defined then you will be notice of which sheet is selected before to start the print job. There is a configuration menu to disable this alert.
+* **Enable disable MMU** A config menu to disable/enable MMU (if the mmu is connected) in order to be able to print flexible filament without phisically disconnect the MMU
+* **First layer flow adapted to noozle** The flow is automatically adapted during the first layer calibration in function of the selected nozzle
+* **Custom Heatbed** Custom Heatbed and axis size support, you can build the printer of the size of you want, there is no restrictions to use the MK52 Heatbed anymore.
+* **Bearmera support** Now the Bearmera extruder is fully compatible, Selftest, beltest, XYZ calibration, ...
+
+
 # Prusa Firmware MK3
 
 This repository contains the source code and the development versions of the firmware running on the [Original Prusa i3](https://prusa3d.com/) MK3S/MK3/MK2.5S/MK2.5 line of printers.
