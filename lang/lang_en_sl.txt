@@ -1377,3 +1377,19 @@
 #MSG_PRINTER_IP c=18
 "Printer IP Addr:"
 "\x00"
+
+#MSG_REPRINT c=7
+"Reprint"
+"\x00"
+
+#MSG_CHECK_STEEL_SHEET c=43
+"Check the selected steel sheet:"
+"\x00"
+
+#MSG_CHOOSE_NOZZLE c=26
+"Choose the nozzle size:"
+"\x00"
+
+#MSG_TUNE_MMU c=8
+"Tune MMU"
+"\x00"
