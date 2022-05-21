@@ -8879,7 +8879,11 @@ void menu_lcd_lcdupdate_func(void)
 		{
 			if (lcd_draw_update == 0)
 			lcd_draw_update = 1;
+			#ifdef REVERSE_LCD_ENCODER
+			lcd_encoder -= lcd_encoder_diff / ENCODER_PULSES_PER_STEP;
+			#else
 			lcd_encoder += lcd_encoder_diff / ENCODER_PULSES_PER_STEP;
+			#endif //REVERSE_LCD_ENCODER
 			Sound_MakeSound(e_SOUND_TYPE_EncoderMove);
 			lcd_encoder_diff = 0;
 			lcd_timeoutToStatus.start();
