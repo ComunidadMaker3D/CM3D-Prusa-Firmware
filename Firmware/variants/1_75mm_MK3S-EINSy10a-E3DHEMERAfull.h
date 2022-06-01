@@ -591,7 +591,7 @@
 #elif defined(E3D_PT100_EXTRUDER_NO_AMP)
 #define TEMP_SENSOR_0 148
 #else
-#define TEMP_SENSOR_0 5
+#define TEMP_SENSOR_0 1
 #endif
 #define TEMP_SENSOR_1 0
 #define TEMP_SENSOR_2 0
@@ -714,6 +714,7 @@
 //Bearmera indicator
 
 #define BEARMERA
+
 
 // This is experimental feature requested by our test department.
 // There is no known use for ordinary user. If enabled by this macro
