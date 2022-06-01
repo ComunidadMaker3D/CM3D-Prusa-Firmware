@@ -19,7 +19,7 @@
 #define DEVELOPER
 
 // Printer name
-#define CUSTOM_MENDEL_NAME "Bearmera MK3S+"
+#define CUSTOM_MENDEL_NAME "Prusa i3 MK3S"
 
 // Electronics
 #define MOTHERBOARD BOARD_EINSY_1_0a
@@ -43,7 +43,7 @@
 
 // Steps per unit {X,Y,Z,E}
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,140}
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,397}
+#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,280}
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,560}
 
 // Endstop inverting
@@ -60,15 +60,15 @@
 #define INVERT_E2_DIR 0   // for direct drive extruder v9 set to 1, for geared extruder set to 0
 
 // Home position
-#define MANUAL_X_HOME_POS -3
+#define MANUAL_X_HOME_POS 0
 #define MANUAL_Y_HOME_POS -2.2
 #define MANUAL_Z_HOME_POS 0.2
 
 // Travel limits after homing
-#define X_MAX_POS 237.18
-#define X_MIN_POS -17.82
-#define Y_MAX_POS 205.88
-#define Y_MIN_POS -10.62 //orig -4
+#define X_MAX_POS 255
+#define X_MIN_POS 0
+#define Y_MAX_POS 212.5
+#define Y_MIN_POS -4 //orig -4
 #define Z_MAX_POS 210
 #define Z_MIN_POS 0.15
 
@@ -222,7 +222,7 @@
 
 #define TMC2130_USTEPS_XY   16        // microstep resolution for XY axes
 #define TMC2130_USTEPS_Z    16        // microstep resolution for Z axis
-#define TMC2130_USTEPS_E    16        // microstep resolution for E axis
+#define TMC2130_USTEPS_E    32        // microstep resolution for E axis
 #define TMC2130_INTPOL_XY   1         // extrapolate 256 for XY axes
 #define TMC2130_INTPOL_Z    1         // extrapolate 256 for Z axis
 #define TMC2130_INTPOL_E    1         // extrapolate 256 for E axis
@@ -436,10 +436,10 @@
 #define MBL_Z_STEP 0.01
 
 // Mesh definitions
-#define MESH_MIN_X 36
+#define MESH_MIN_X 24
 #define MESH_MAX_X 228
-#define MESH_MIN_Y 19
-#define MESH_MAX_Y 205
+#define MESH_MIN_Y 6
+#define MESH_MAX_Y 210
 
 // Mesh upsample definition
 #define MESH_NUM_X_POINTS 7
@@ -454,8 +454,8 @@
 #define MESH_HOME_Z_CALIB 0.2
 #define MESH_HOME_Z_SEARCH 5.0f           // Z lift for homing, mesh bed leveling etc.
 
-#define X_PROBE_OFFSET_FROM_EXTRUDER 35.75     // Z probe to nozzle X offset: -left  +right
-#define Y_PROBE_OFFSET_FROM_EXTRUDER 18.7     // Z probe to nozzle Y offset: -front +behind
+#define X_PROBE_OFFSET_FROM_EXTRUDER 23     // Z probe to nozzle X offset: -left  +right
+#define Y_PROBE_OFFSET_FROM_EXTRUDER 5     // Z probe to nozzle Y offset: -front +behind
 #define Z_PROBE_OFFSET_FROM_EXTRUDER -0.4  // Z probe to nozzle Z offset: -below (always!)
 #endif
 
@@ -677,11 +677,11 @@
 /**
  * [0,0] bed print area point X coordinate in bed coordinates ver. 05d/24V
  */
-#define BED_PRINT_ZERO_REF_X 3.f
+#define BED_PRINT_ZERO_REF_X 2.f
 /**
  * [0,0] bed print area point Y coordinate in bed coordinates ver. 05d/24V
  */
-#define BED_PRINT_ZERO_REF_Y 2.8f
+#define BED_PRINT_ZERO_REF_Y 9.4f
 
 /**
  * @brief Positions of the bed reference points in print area coordinates. ver. 05d/24V
@@ -705,15 +705,11 @@
 #define RL_CAL_POINT_X_POSITION 37.f
 #define RL_CAL_POINT_Y_POSITION 210.4f
 
-#define Y_OFFSET 12
+#define Y_OFFSET 8
 #define AXIS_MARGIN 60
 
 #define MAX_ERROR_X 5
 #define MAX_ERROR_Y 5
-
-//Bearmera indicator
-
-#define BEARMERA
 
 // This is experimental feature requested by our test department.
 // There is no known use for ordinary user. If enabled by this macro
