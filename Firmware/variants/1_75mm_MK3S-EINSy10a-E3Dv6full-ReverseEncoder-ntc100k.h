@@ -19,11 +19,8 @@
 #define DEVELOPER
 
 // Printer name
-<<<<<<<< HEAD:Firmware/variants/1_75mm_MK3S-EINSy10a-E3DHEMERAfull.h
-#define CUSTOM_MENDEL_NAME "Bearmera MK3S+"
-========
+
 #define CUSTOM_MENDEL_NAME "Prusa i3 MK3S"
->>>>>>>> CM3D_dev:Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full-ReverseEncoder-ntc100k.h
 
 // Electronics
 #define MOTHERBOARD BOARD_EINSY_1_0a
@@ -47,12 +44,8 @@
 
 // Steps per unit {X,Y,Z,E}
 //#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,140}
-<<<<<<<< HEAD:Firmware/variants/1_75mm_MK3S-EINSy10a-E3DHEMERAfull.h
-#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,397}
-========
+
 #define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,280}
->>>>>>>> CM3D_dev:Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full-ReverseEncoder-ntc100k.h
-//#define DEFAULT_AXIS_STEPS_PER_UNIT   {100,100,3200/8,560}
 
 // Endstop inverting
 #define X_MIN_ENDSTOP_INVERTING 0 // set to 1 to invert the logic of the endstop.
@@ -73,17 +66,10 @@
 #define MANUAL_Z_HOME_POS 0.2
 
 // Travel limits after homing
-<<<<<<<< HEAD:Firmware/variants/1_75mm_MK3S-EINSy10a-E3DHEMERAfull.h
-#define X_MAX_POS 237.18
-#define X_MIN_POS -17.82
-#define Y_MAX_POS 205.88
-#define Y_MIN_POS -10.62 //orig -4
-========
 #define X_MAX_POS 255
 #define X_MIN_POS 0
 #define Y_MAX_POS 212.5
 #define Y_MIN_POS -4 //orig -4
->>>>>>>> CM3D_dev:Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full-ReverseEncoder-ntc100k.h
 #define Z_MAX_POS 210
 #define Z_MIN_POS 0.15
 
@@ -237,11 +223,7 @@
 
 #define TMC2130_USTEPS_XY   16        // microstep resolution for XY axes
 #define TMC2130_USTEPS_Z    16        // microstep resolution for Z axis
-<<<<<<<< HEAD:Firmware/variants/1_75mm_MK3S-EINSy10a-E3DHEMERAfull.h
-#define TMC2130_USTEPS_E    16        // microstep resolution for E axis
-========
 #define TMC2130_USTEPS_E    32        // microstep resolution for E axis
->>>>>>>> CM3D_dev:Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full-ReverseEncoder-ntc100k.h
 #define TMC2130_INTPOL_XY   1         // extrapolate 256 for XY axes
 #define TMC2130_INTPOL_Z    1         // extrapolate 256 for Z axis
 #define TMC2130_INTPOL_E    1         // extrapolate 256 for E axis
@@ -696,19 +678,12 @@
 /**
  * [0,0] bed print area point X coordinate in bed coordinates ver. 05d/24V
  */
-<<<<<<<< HEAD:Firmware/variants/1_75mm_MK3S-EINSy10a-E3DHEMERAfull.h
-#define BED_PRINT_ZERO_REF_X 3.f
-/**
- * [0,0] bed print area point Y coordinate in bed coordinates ver. 05d/24V
- */
-#define BED_PRINT_ZERO_REF_Y 2.8f
-========
+
 #define BED_PRINT_ZERO_REF_X 2.f
 /**
  * [0,0] bed print area point Y coordinate in bed coordinates ver. 05d/24V
  */
 #define BED_PRINT_ZERO_REF_Y 9.4f
->>>>>>>> CM3D_dev:Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full-ReverseEncoder-ntc100k.h
 
 /**
  * @brief Positions of the bed reference points in print area coordinates. ver. 05d/24V
@@ -732,26 +707,16 @@
 #define RL_CAL_POINT_X_POSITION 37.f
 #define RL_CAL_POINT_Y_POSITION 210.4f
 
-<<<<<<<< HEAD:Firmware/variants/1_75mm_MK3S-EINSy10a-E3DHEMERAfull.h
-#define Y_OFFSET 12
-========
+
 #define Y_OFFSET 8
->>>>>>>> CM3D_dev:Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full-ReverseEncoder-ntc100k.h
 #define AXIS_MARGIN 60
 
 #define MAX_ERROR_X 5
 #define MAX_ERROR_Y 5
 
-<<<<<<<< HEAD:Firmware/variants/1_75mm_MK3S-EINSy10a-E3DHEMERAfull.h
-//Bearmera indicator
-
-#define BEARMERA
-
-========
 //Reverse encoder
 
 #define REVERSE_LCD_ENCODER
->>>>>>>> CM3D_dev:Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full-ReverseEncoder-ntc100k.h
 // This is experimental feature requested by our test department.
 // There is no known use for ordinary user. If enabled by this macro
 // and enabled from printer menu (not enabled by default). It cuts filament

@@ -711,12 +711,9 @@
 #define MAX_ERROR_X 5
 #define MAX_ERROR_Y 5
 
-<<<<<<<< HEAD:Firmware/variants/1_75mm_MK3S-TL31-EINSy10a-E3Dv6full.h
-========
 //Reverse encoder
 
 #define REVERSE_LCD_ENCODER
->>>>>>>> CM3D_dev:Firmware/variants/1_75mm_MK3S-EINSy10a-E3Dv6full-ReverseEncoder.h
 // This is experimental feature requested by our test department.
 // There is no known use for ordinary user. If enabled by this macro
 // and enabled from printer menu (not enabled by default). It cuts filament
