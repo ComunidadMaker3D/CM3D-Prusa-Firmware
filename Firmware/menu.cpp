@@ -370,6 +370,33 @@ uint8_t menu_item_function_P(const char* str, menu_func_t func)
 
 //! @brief Menu item function taking single parameter
 //!
+//! Ideal for calling functions with number parameter.
+//! @param str Item caption
+//! @param func pointer to function taking uint8_t with no return value
+//! @param fn_par value to be passed to function
+//! @retval 0
+//! @retval 1 Item was clicked
+uint8_t menu_item_function_P(const char* str, void (*func)(uint8_t), uint8_t fn_par)
+{
+    if (menu_item == menu_line)
+    {
+        if (lcd_draw_update) menu_draw_item_puts_P(' ', str);
+        if (menu_clicked && (lcd_encoder == menu_item))
+        {
+            menu_clicked = false;
+            lcd_consume_click();
+            lcd_update_enabled = 0;
+            if (func) func(fn_par);
+            lcd_update_enabled = 1;
+            return menu_item_ret();
+        }
+    }
+    menu_item++;
+    return 0;
+}
+
+//! @brief Menu item function taking single parameter
+//!
 //! Ideal for numbered lists calling functions with number parameter.
 //! @param str Item caption
 //! @param number aditional character to be added after str, e.g. number
@@ -395,7 +422,6 @@ uint8_t menu_item_function_P(const char* str, char number, void (*func)(uint8_t)
     menu_item++;
     return 0;
 }
-
 uint8_t menu_item_toggle_P(const char* str, const char* toggle, menu_func_t func, const uint8_t settings)
 {
 	if (menu_item == menu_line)
