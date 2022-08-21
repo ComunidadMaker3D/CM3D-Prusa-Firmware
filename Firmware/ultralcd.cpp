@@ -146,13 +146,13 @@ static void lcd_v2_calibration();
 
 static void mmu_eject_filament(uint8_t filament);
 static void mmu_fil_actions_menu();
-static void mmu_fil_eject_menu();
-static void mmu_load_to_nozzle_menu();
+// static void mmu_fil_eject_menu();
+// static void mmu_load_to_nozzle_menu();
 static void preheat_or_continue();
 
-#ifdef MMU_HAS_CUTTER
-static void mmu_cut_filament_menu();
-#endif //MMU_HAS_CUTTER
+// #ifdef MMU_HAS_CUTTER
+// static void mmu_cut_filament_menu();
+// #endif //MMU_HAS_CUTTER
 
 #if defined(TMC2130) || defined(FILAMENT_SENSOR)
 static void lcd_menu_fails_stats();
@@ -2238,7 +2238,7 @@ void mFilamentItem(uint16_t nTemp, uint16_t nTempBed)
             nLevel = bFilamentPreheatState ? 1 : 2;
             bFilamentAction = true;
             menu_back(nLevel);
-            menu_submenu(mmu_load_to_nozzle_menu);
+            menu_submenu(mmu_fil_actions_menu);
             break;
         case FilamentAction::MmuUnLoad:
             nLevel = bFilamentPreheatState ? 1 : 2;
@@ -2250,14 +2250,14 @@ void mFilamentItem(uint16_t nTemp, uint16_t nTempBed)
             nLevel = bFilamentPreheatState ? 1 : 2;
             bFilamentAction = true;
             menu_back(nLevel);
-            menu_submenu(mmu_fil_eject_menu);
+            menu_submenu(mmu_fil_actions_menu);
             break;
         case FilamentAction::MmuCut:
 #ifdef MMU_HAS_CUTTER
             nLevel=bFilamentPreheatState?1:2;
             bFilamentAction=true;
             menu_back(nLevel);
-            menu_submenu(mmu_cut_filament_menu);
+            menu_submenu(mmu_fil_actions_menu);
 #endif //MMU_HAS_CUTTER
             break;
         case FilamentAction::None:
