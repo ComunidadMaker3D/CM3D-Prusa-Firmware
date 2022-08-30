@@ -194,6 +194,7 @@ int extruder_multiply[EXTRUDERS] = {100
 int bowden_length[4] = {385, 385, 385, 385};
 
 bool sheet_alert_enabled = true;
+int mmu_nr_extruders = 5;
 bool is_usb_printing = false;
 bool homing_flag = false;
 
@@ -8988,7 +8989,7 @@ Sigma_Exit:
 
       *(strchr_pointer + index) = tolower(*(strchr_pointer + index));
 
-      if ((*(strchr_pointer + index) < '0' || *(strchr_pointer + index) > '4') && *(strchr_pointer + index) != '?' && *(strchr_pointer + index) != 'x' && *(strchr_pointer + index) != 'c') {
+      if ((*(strchr_pointer + index) < '0' || *(strchr_pointer + index) > mmu_nr_extruders-1) && *(strchr_pointer + index) != '?' && *(strchr_pointer + index) != 'x' && *(strchr_pointer + index) != 'c') {
           SERIAL_ECHOLNPGM("Invalid T code.");
       }
 	  else if (*(strchr_pointer + index) == 'x'){ //load to bondtech gears; if mmu is not present do nothing
