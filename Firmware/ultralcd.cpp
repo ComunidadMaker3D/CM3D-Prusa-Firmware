@@ -144,9 +144,9 @@ static void mmu_unload_filament();
 static void lcd_v2_calibration();
 //static void lcd_menu_show_sensors_state();      // NOT static due to using inside "Marlin_main" module ("manage_inactivity()")
 
-//static void mmu_eject_filament_menu();
-// static void mmu_fil_actions_menu();
-static void mmu_fil_eject_menu();
+static void mmu_eject_filament_menu();
+static void mmu_fil_actions_menu();
+// static void mmu_fil_eject_menu();
 static void mmu_load_to_nozzle_menu();
 static void preheat_or_continue();
 
@@ -2239,7 +2239,7 @@ void mFilamentItem(uint16_t nTemp, uint16_t nTempBed)
             nLevel = bFilamentPreheatState ? 1 : 2;
             bFilamentAction = true;
             menu_back(nLevel);
-            menu_submenu(mmu_load_to_nozzle_menu);
+			menu_submenu(mmu_load_to_nozzle_menu);
             break;
         case FilamentAction::MmuUnLoad:
             nLevel = bFilamentPreheatState ? 1 : 2;
@@ -2251,7 +2251,7 @@ void mFilamentItem(uint16_t nTemp, uint16_t nTempBed)
             nLevel = bFilamentPreheatState ? 1 : 2;
             bFilamentAction = true;
             menu_back(nLevel);
-            menu_submenu(mmu_fil_eject_menu);
+            menu_submenu(mmu_eject_filament_menu);
             break;
         case FilamentAction::MmuCut:
 #ifdef MMU_HAS_CUTTER
@@ -6162,115 +6162,109 @@ static void lcd_disable_farm_mode()
 	
 }
 
-// static void mmu_fil_actions_menu()
-// {
-// 	MENU_BEGIN();
-//     MENU_ITEM_BACK_P(_T(MSG_MAIN));
-// 	MENU_ITEM_EDIT_int3_P(_i("Select Filament %2d"), &mmu_selected_filament, 1, mmu_nr_extruders);
-// 	MENU_ITEM_FUNCTION_FN_P(_T(MSG_LOAD_FILAMENT), extr_adj, mmu_selected_filament-1);
-// 	MENU_ITEM_FUNCTION_P(_i("Load all"), load_all); ////MSG_LOAD_ALL c=17
-// 	MENU_ITEM_SUBMENU_P(_i("Load to nozzle"), mmu_load_to_nozzle_menu);
-// 	MENU_ITEM_SUBMENU_P(_T(MSG_UNLOAD_FILAMENT), mmu_unload_filament);////MSG_UNLOAD_FILAMENT_4 c=17
-// 	MENU_ITEM_SUBMENU_P(_T(MSG_EJECT_FILAMENT), mmu_eject_filament_menu);
-// 	MENU_ITEM_SUBMENU_P(_T(MSG_CUT_FILAMENT), mmu_cut_filament_menu);
-//     MENU_END();
-// }
-
-
-static void fil_load_menu()
+static void mmu_fil_actions_menu()
 {
-    MENU_BEGIN();
+	MENU_BEGIN();
     MENU_ITEM_BACK_P(_T(MSG_MAIN));
-    MENU_ITEM_FUNCTION_P(_i("Load all"), load_all); ////MSG_LOAD_ALL c=17
-    MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '1', extr_adj, 0);
-    MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '2', extr_adj, 1);
-    MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '3', extr_adj, 2);
-    MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '4', extr_adj, 3);
-
-    if (mmu_enabled)
-    {
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '5', extr_adj, 4);
-    }
+	MENU_ITEM_EDIT_int3_P(_i("Select Filament %2d"), &mmu_selected_filament, 1, mmu_nr_extruders);
+	MENU_ITEM_FUNCTION_FN_P(_T(MSG_LOAD_FILAMENT), extr_adj, mmu_selected_filament-1);
+	MENU_ITEM_FUNCTION_P(_i("Load all"), load_all); ////MSG_LOAD_ALL c=17
+	MENU_ITEM_SUBMENU_P(_i("Load to nozzle"), mmu_load_to_nozzle_menu);
+	MENU_ITEM_SUBMENU_P(_T(MSG_UNLOAD_FILAMENT), mmu_unload_filament);////MSG_UNLOAD_FILAMENT_4 c=17
+	MENU_ITEM_SUBMENU_P(_T(MSG_EJECT_FILAMENT), mmu_eject_filament_menu);
+	MENU_ITEM_SUBMENU_P(_T(MSG_CUT_FILAMENT), mmu_cut_filament_menu);
     MENU_END();
 }
 
- static void mmu_load_to_nozzle_menu()
-//  {
-// 	if (bFilamentAction)
+
+// static void fil_load_menu()
+// {
+//     MENU_BEGIN();
+//     MENU_ITEM_BACK_P(_T(MSG_MAIN));
+//     MENU_ITEM_FUNCTION_P(_i("Load all"), load_all); ////MSG_LOAD_ALL c=17
+//     MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '1', extr_adj, 0);
+//     MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '2', extr_adj, 1);
+//     MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '3', extr_adj, 2);
+//     MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '4', extr_adj, 3);
+
+//     if (mmu_enabled)
 //     {
-// 		MENU_BEGIN();
-// 		MENU_ITEM_BACK_P(_T(MSG_MAIN));
-//     	//menu_back();
-// 		MENU_ITEM_FUNCTION_FN_P(_T(MSG_LOAD_FILAMENT), lcd_mmu_load_to_nozzle, mmu_selected_filament-1);
-// 	 	//lcd_mmu_load_to_nozzle(mmu_selected_filament-1);
-// 		MENU_END();
-// 	}else
-// 	{
-// 		eFilamentAction = FilamentAction::MmuLoad;
-//         preheat_or_continue();
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '5', extr_adj, 4);
 //     }
-//  }
-{
-    if (bFilamentAction)
+//     MENU_END();
+// }
+
+ static void mmu_load_to_nozzle_menu()
+ {
+	if (bFilamentAction)
     {
-        MENU_BEGIN();
-        MENU_ITEM_BACK_P(_T(MSG_MAIN));
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '1', lcd_mmu_load_to_nozzle, 0);
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '2', lcd_mmu_load_to_nozzle, 1);
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '3', lcd_mmu_load_to_nozzle, 2);
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '4', lcd_mmu_load_to_nozzle, 3);
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '5', lcd_mmu_load_to_nozzle, 4);
-        MENU_END();
-    }
-    else
-    {
-        eFilamentAction = FilamentAction::MmuLoad;
+		MENU_BEGIN();
+		MENU_ITEM_BACK_P(_T(MSG_MAIN));
+    	//menu_back();
+		MENU_ITEM_FUNCTION_FN_P(_T(MSG_LOAD_FILAMENT), lcd_mmu_load_to_nozzle, mmu_selected_filament-1);
+	 	//lcd_mmu_load_to_nozzle(mmu_selected_filament-1);
+		MENU_END();
+	}else
+	{
+		eFilamentAction = FilamentAction::MmuLoad;
         preheat_or_continue();
     }
-}
-
-// static void mmu_eject_filament_menu()
+ }
 // {
-// 	if (bFilamentAction)
+//     if (bFilamentAction)
 //     {
-// 		MENU_BEGIN();
-// 		MENU_ITEM_BACK_P(_T(MSG_MAIN));
-//     	//menu_back();
-// 		mmu_eject_filament(mmu_selected_filament-1, true);
-// 		MENU_END();
-// 	}
-// 	else
-// 	{
-// 		eFilamentAction = FilamentAction::MmuEject;
+//         MENU_BEGIN();
+//         MENU_ITEM_BACK_P(_T(MSG_MAIN));
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '1', lcd_mmu_load_to_nozzle, 0);
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '2', lcd_mmu_load_to_nozzle, 1);
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '3', lcd_mmu_load_to_nozzle, 2);
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '4', lcd_mmu_load_to_nozzle, 3);
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_LOAD_FILAMENT), '5', lcd_mmu_load_to_nozzle, 4);
+//         MENU_END();
+//     }
+//     else
+//     {
+//         eFilamentAction = FilamentAction::MmuLoad;
 //         preheat_or_continue();
 //     }
 // }
 
-static void mmu_eject_filament(uint8_t filament)
+static void mmu_eject_filament_menu()
 {
-    menu_back();
-    mmu_eject_filament(filament, true);
-}
-
-static void mmu_fil_eject_menu()
-{
-    if (bFilamentAction)
+	if (bFilamentAction)
     {
-        MENU_BEGIN();
-        MENU_ITEM_BACK_P(_T(MSG_MAIN));
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '1', mmu_eject_filament, 0);
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '2', mmu_eject_filament, 1);
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '3', mmu_eject_filament, 2);
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '4', mmu_eject_filament, 3);
-        MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '5', mmu_eject_filament, 4);
-        MENU_END();
-    }
-    else
-    {
-        eFilamentAction = FilamentAction::MmuEject;
+		MENU_BEGIN();
+		MENU_ITEM_BACK_P(_T(MSG_MAIN));
+    	//menu_back();
+		mmu_eject_filament(mmu_selected_filament-1, true);
+		MENU_END();
+	}
+	else
+	{
+		eFilamentAction = FilamentAction::MmuEject;
         preheat_or_continue();
     }
 }
+
+// static void mmu_fil_eject_menu()
+// {
+//     if (bFilamentAction)
+//     {
+//         MENU_BEGIN();
+//         MENU_ITEM_BACK_P(_T(MSG_MAIN));
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '1', mmu_eject_filament, 0);
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '2', mmu_eject_filament, 1);
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '3', mmu_eject_filament, 2);
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '4', mmu_eject_filament, 3);
+//         MENU_ITEM_FUNCTION_NR_P(_T(MSG_EJECT_FILAMENT), '5', mmu_eject_filament, 4);
+//         MENU_END();
+//     }
+//     else
+//     {
+//         eFilamentAction = FilamentAction::MmuEject;
+//         preheat_or_continue();
+//     }
+// }
 
 #ifdef MMU_HAS_CUTTER
 
@@ -6681,16 +6675,16 @@ static void lcd_main_menu()
 
     if ( ! ( IS_SD_PRINTING || is_usb_printing || (lcd_commands_type == LcdCommands::Layer1Cal) ) ) {
         if (mmu_enabled) {
-			// MENU_ITEM_SUBMENU_P(_i("Filament Actions"), mmu_fil_actions_menu);
-            MENU_ITEM_SUBMENU_P(_T(MSG_LOAD_FILAMENT), fil_load_menu);
-            MENU_ITEM_SUBMENU_P(_i("Load to nozzle"), mmu_load_to_nozzle_menu);////MSG_LOAD_TO_NOZZLE c=18
-//-//          MENU_ITEM_FUNCTION_P(_T(MSG_UNLOAD_FILAMENT), extr_unload);
-//bFilamentFirstRun=true;
-            MENU_ITEM_SUBMENU_P(_T(MSG_UNLOAD_FILAMENT), mmu_unload_filament);
-            MENU_ITEM_SUBMENU_P(_T(MSG_EJECT_FILAMENT), mmu_fil_eject_menu);
-#ifdef  MMU_HAS_CUTTER
-            MENU_ITEM_SUBMENU_P(_T(MSG_CUT_FILAMENT), mmu_cut_filament_menu);
-#endif //MMU_HAS_CUTTER
+			MENU_ITEM_SUBMENU_P(_i("Filament Actions"), mmu_fil_actions_menu);
+//             MENU_ITEM_SUBMENU_P(_T(MSG_LOAD_FILAMENT), fil_load_menu);
+//             MENU_ITEM_SUBMENU_P(_i("Load to nozzle"), mmu_load_to_nozzle_menu);////MSG_LOAD_TO_NOZZLE c=18
+// //-//          MENU_ITEM_FUNCTION_P(_T(MSG_UNLOAD_FILAMENT), extr_unload);
+// //bFilamentFirstRun=true;
+//             MENU_ITEM_SUBMENU_P(_T(MSG_UNLOAD_FILAMENT), mmu_unload_filament);
+//             MENU_ITEM_SUBMENU_P(_T(MSG_EJECT_FILAMENT), mmu_fil_eject_menu);
+// #ifdef  MMU_HAS_CUTTER
+//             MENU_ITEM_SUBMENU_P(_T(MSG_CUT_FILAMENT), mmu_cut_filament_menu);
+// #endif //MMU_HAS_CUTTER
         } else {
 #ifdef SNMM
             MENU_ITEM_SUBMENU_P(_T(MSG_UNLOAD_FILAMENT), fil_unload_menu);
