@@ -1274,7 +1274,7 @@ void extr_unload_all()
 {
 	if (degHotend0() > EXTRUDE_MINTEMP)
 	{
-		for (int i = 0; i < mmu_nr_extruders-1; i++)
+		for (int i = 0; i < 9; i++)
 		{
 			change_extr(i);
 			extr_unload();
@@ -1291,7 +1291,7 @@ void extr_unload_all()
 void extr_unload_used()
 {
 	if (degHotend0() > EXTRUDE_MINTEMP) {
-		for (int i = 0; i < mmu_nr_extruders-1; i++) {
+		for (int i = 0; i < 9; i++) {
 			if (snmm_filaments_used & (1 << i)) {
 				change_extr(i);
 				extr_unload();
