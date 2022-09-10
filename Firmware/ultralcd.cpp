@@ -5986,7 +5986,7 @@ static char snmm_stop_print_menu() { //menu for choosing which filaments will be
 uint8_t choose_menu_P(const char *header, const char *item, const char *last_item)
 {
     //following code should handle 3 to 127 number of items well
-    const int8_t items_no = last_item?(mmu_enabled?6:5):(mmu_enabled?5:4);
+    const int8_t items_no = mmu_nr_extruders;//last_item?(mmu_enabled?6:5):(mmu_enabled?5:4);
     const uint8_t item_len = item?strlen_P(item):0;
 	int8_t first = 0;
 	int8_t enc_dif = lcd_encoder_diff;
@@ -9222,10 +9222,12 @@ static void lcd_tune_mmu()
 	if (mmu_enabled==true)
 	{
 		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_ON),lcd_switch_mmu_status);
+		fsensor_enable(false);
 	}
 	else
 	{
 		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_OFF),lcd_switch_mmu_status);
+		fsensor_disable(false);
 	}
 	MENU_ITEM_EDIT_int3_P(_i("Nr Extruders"), &mmu_nr_extruders, 5, 10);//2
 	lcd_set_mmu_nr_extruders();

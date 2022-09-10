@@ -1378,11 +1378,11 @@
 "Printer IP Addr:"
 "Adr. IP drukarki:"
 
-# MSG_REPRINT c=8
+#MSG_REPRINT c=8
 "Reprint"
 "Przedruk"
 
-# MSG_CHECK_STEEL_SHEET c=31
+#MSG_CHECK_STEEL_SHEET c=31
 "Check the selected steel sheet:"
 "Sprawdz wybrana blache stalowa:"
 
