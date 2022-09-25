@@ -5688,7 +5688,7 @@ static void lcd_settings_menu()
 
 	MENU_ITEM_TOGGLE_P(_T(MSG_FANS_CHECK), fans_check_enabled ? _T(MSG_ON) : _T(MSG_OFF), lcd_set_fan_check);
 
-	MENU_ITEM_TOGGLE_P(_I("Sheet Alert"), sheet_alert_enabled ? _T(MSG_ON) : _T(MSG_OFF), lcd_set_sheet_alert);
+	MENU_ITEM_TOGGLE_P(_T(MSG_SHEET_ALERT), sheet_alert_enabled ? _T(MSG_ON) : _T(MSG_OFF), lcd_set_sheet_alert);
 
 	SETTINGS_SILENT_MODE;
 
@@ -9221,15 +9221,15 @@ static void lcd_tune_mmu()
 	MENU_ITEM_BACK_P(_T(MSG_MAIN)); //1
 	if (mmu_enabled==true)
 	{
-		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_ON),lcd_switch_mmu_status);
+		MENU_ITEM_TOGGLE_P(_T(MSG_MMU_STATUS),_T(MSG_ON),lcd_switch_mmu_status);
 		fsensor_enable(false);
 	}
 	else
 	{
-		MENU_ITEM_TOGGLE_P(_i("MMU status"),_T(MSG_OFF),lcd_switch_mmu_status);
+		MENU_ITEM_TOGGLE_P(_T(MSG_MMU_STATUS),_T(MSG_OFF),lcd_switch_mmu_status);
 		fsensor_disable(false);
 	}
-	MENU_ITEM_EDIT_int3_P(_i("Nr Extruders"), &mmu_nr_extruders, 5, 10);//2
+	MENU_ITEM_EDIT_int3_P(_T(MSG_NR_EXTRUDERS), &mmu_nr_extruders, 5, 10);//2
 	lcd_set_mmu_nr_extruders();
 	MENU_END();
 }

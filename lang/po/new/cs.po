@@ -1746,11 +1746,26 @@ msgid "Check the selected steel sheet:"
 msgstr "Zkontrolujte vybrany ocelovy plech:"
 
 #MSG_CHOOSE_NOZZLE c=24 r=2
-#: messages.c:166
+#: messages.c:171
 msgid "Choose the nozzle size:"
 msgstr "Vyberte velikost trysky:"
 
 #MSG_TUNE_MMU c=11
-#: messages.c:166
+#: messages.c:171
 msgid "Tune MMU"
 msgstr "Naladit MMU"
+
+# MSG_MMU_STATUS c=10
+#: messages.c:173
+msgid "MMU Status"
+msgstr ""
+
+# MSG_NR_EXTRUDERS c=12
+#: messages.c:174
+msgid "Nr Extruders"
+msgstr ""
+
+# MSG_SHEET_ALERT c=11
+#: messages.c:175
+msgid "Sheet alert"
+msgstr ""

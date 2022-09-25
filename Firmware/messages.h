@@ -173,6 +173,10 @@ extern const char MSG_IR_UNKNOWN[];
 extern const char MSG_CHECK_STEEL_SHEET[];
 extern const char MSG_REPRINT[];
 extern const char MSG_CHOOSE_NOZZLE[];
+extern const char MSG_TUNE_MMU[];
+extern const char MSG_MMU_STATUS[];
+extern const char MSG_NR_EXTRUDERS[];
+extern const char MSG_SHEET_ALERT[];
 
 //not internationalized messages
 extern const char MSG_BROWNOUT_RESET[];
@@ -212,9 +216,6 @@ extern const char MSG_LCD_STATUS_CHANGED[];
 extern const char MSG_UNKNOWN_CODE[];
 extern const char MSG_NOZZLE_06[];
 extern const char MSG_NOZZLE_04[];
-extern const char MSG_CHECK_STEEL_SHEET[];
-extern const char MSG_REPRINT[];
-extern const char MSG_TUNE_MMU[];
 
 #if defined(__cplusplus)
 }

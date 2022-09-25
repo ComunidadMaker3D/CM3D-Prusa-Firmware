@@ -1740,3 +1740,22 @@ msgstr "Z-test nr."
 msgid "Printer IP Addr:"
 msgstr "Printer IP-adres:"
 
+# MSG_TUNE_MMU c=8
+#: messages.c:172
+msgid "Tune MMU"
+msgstr ""
+
+# MSG_MMU_STATUS c=10
+#: messages.c:173
+msgid "MMU Status"
+msgstr ""
+
+# MSG_NR_EXTRUDERS c=12
+#: messages.c:174
+msgid "Nr Extruders"
+msgstr ""
+
+# MSG_SHEET_ALERT c=11
+#: messages.c:175
+msgid "Sheet alert"
+msgstr ""

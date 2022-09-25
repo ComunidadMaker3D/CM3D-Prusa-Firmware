@@ -1044,3 +1044,12 @@
 
 #MSG_TUNE_MMU c=8
 "Tune MMU"
+
+#MSG_MMU_STATUS c=10
+"MMU Status"
+
+#MSG_NR_EXTRUDERS c=12
+"Nr Extruders"
+
+#MSG_SHEET_ALERT c=11
+"Sheet alert"

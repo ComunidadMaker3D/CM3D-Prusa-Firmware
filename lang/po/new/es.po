@@ -1751,11 +1751,26 @@ msgid "Check the selected steel sheet:"
 msgstr "Compruebe la plancha seleccionada:"
 
 #MSG_CHOOSE_NOZZLE c=29 r=2
-#: messages.c:166
+#: messages.c:171
 msgid "Choose the nozzle size:"
 msgstr "Elige el diametro del nozzle:"
 
-#MSG_TUNE_MMU c=9
-#: messages.c:166
+# MSG_TUNE_MMU c=9
+#: messages.c:172
 msgid "Tune MMU"
 msgstr "Tuneo MMU"
+
+# MSG_MMU_STATUS c=10
+#: messages.c:173
+msgid "MMU Status"
+msgstr "Estado MMU"
+
+# MSG_NR_EXTRUDERS c=16
+#: messages.c:174
+msgid "Nr Extruders"
+msgstr "Nr de Extrusores"
+
+# MSG_SHEET_ALERT c=13
+#: messages.c:175
+msgid "Sheet alert"
+msgstr "Aviso plancha"

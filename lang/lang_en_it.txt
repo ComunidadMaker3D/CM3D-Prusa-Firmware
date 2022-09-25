@@ -1393,3 +1393,15 @@
 #MSG_TUNE_MMU c=16
 "Tune MMU"
 "Sintonizzare MMU"
+
+#MSG_MMU_STATUS c=10
+"MMU Status"
+"\x00"
+
+#MSG_NR_EXTRUDERS c=12
+"Nr Extruders"
+"\x00"
+
+#MSG_SHEET_ALERT c=13
+"Sheet alert"
+"Piano allarme"

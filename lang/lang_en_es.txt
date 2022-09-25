@@ -1393,3 +1393,15 @@
 #MSG_TUNE_MMU c=9
 "Tune MMU"
 "Tuneo MMU"
+
+#MSG_MMU_STATUS c=10
+"MMU Status"
+"Estado MMU"
+
+#MSG_NR_EXTRUDERS c=16
+"Nr Extruders"
+"Nr de Extrusores"
+
+#MSG_SHEET_ALERT c=13
+"Sheet alert"
+"Aviso plancha"

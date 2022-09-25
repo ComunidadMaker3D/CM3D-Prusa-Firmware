@@ -1751,11 +1751,26 @@ msgid "Check the selected steel sheet:"
 msgstr "Verifier la tole d'acier installee:"
 
 #MSG_CHOOSE_NOZZLE c=32 r=2
-#: messages.c:166
+#: messages.c:171
 msgid "Choose the nozzle size:"
 msgstr "Choisissez la taille de la buse:"
 
 #MSG_TUNE_MMU c=12
-#: messages.c:166
+#: messages.c:172
 msgid "Tune MMU"
 msgstr "Accorder MMU"
+
+# MSG_MMU_STATUS c=13
+#: messages.c:173
+msgid "MMU Status"
+msgstr "MMU Condition"
+
+# MSG_NR_EXTRUDERS c=12
+#: messages.c:174
+msgid "Nr Extruders"
+msgstr "Nr Extrudeur"
+
+# MSG_SHEET_ALERT c=13
+#: messages.c:175
+msgid "Sheet alert"
+msgstr "Plaque alerte"

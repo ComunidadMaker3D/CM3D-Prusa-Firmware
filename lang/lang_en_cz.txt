@@ -1393,3 +1393,15 @@
 #MSG_TUNE_MMU c=11
 "Tune MMU"
 "Naladit MMU"
+
+#MSG_MMU_STATUS c=8
+"MMU Status"
+"Stav MMU"
+
+#MSG_NR_EXTRUDERS c=12
+"Nr Extruders"
+"\x00"
+
+#MSG_SHEET_ALERT c=11
+"Sheet alert"
+"\x00"

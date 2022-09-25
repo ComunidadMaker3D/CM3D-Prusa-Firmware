@@ -170,7 +170,9 @@ const char MSG_REPRINT[] PROGMEM_I1 = ISTR("Reprint"); ////c=7
 const char MSG_CHECK_STEEL_SHEET[] PROGMEM_I1 = ISTR("Check the selected steel sheet:"); ////c=31
 const char MSG_CHOOSE_NOZZLE[] PROGMEM_I1 = ISTR("Choose the nozzle size:"); ////c=23
 const char MSG_TUNE_MMU[] PROGMEM_I1 = ISTR("Tune MMU"); ////c=8
-
+const char MSG_MMU_STATUS[] PROGMEM_I1 = ISTR("MMU Status"); ////c=10
+const char MSG_NR_EXTRUDERS[] PROGMEM_I1 = ISTR("Nr Extruders"); ////c=12
+const char MSG_SHEET_ALERT[] PROGMEM_I1 = ISTR("Sheet alert"); ////c=11
 
 //not internationalized messages
 const char MSG_AUTO_DEPLETE[] PROGMEM_N1 = ISTR("SpoolJoin"); ////c=13
