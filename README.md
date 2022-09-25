@@ -2,6 +2,7 @@
 
 This firmware take as base the @PRUSA3D firmware developed for the MK3S+, we started to develop the firmware for the Vertex XL but finally we decided to be out of that project and continue to develop the firmware for the community without any kind of brand/company behind us. Because of that this is a fork of the Vertex XL firmware repository, just to save all our developments and continue the work which was done with many efforts. 
 I want to say thanks to @Dainse and to many other people/users whose have been testing and proposing new features to the firmware in the past years. 
+
 # Add-on features 
 
 * **Reprint** option, there is no need to navigate to the g-code anymore,just select on REPRINT.
@@ -10,7 +11,30 @@ I want to say thanks to @Dainse and to many other people/users whose have been t
 * **First layer flow adapted to noozle** The flow is automatically adapted during the first layer calibration in function of the selected nozzle
 * **Custom Heatbed** Custom Heatbed and axis size support, you can build the printer of the size of you want, there is no restrictions to use the MK52 Heatbed anymore.
 * **Bearmera support** Now the Bearmera extruder is fully compatible, Selftest, beltest, XYZ calibration, ...
+* **MMU dinamic number of extruder support** Now you are able to choose the number of extruders which support your MMU always between 5 and 10. This firmware will be a perfect fit for the @Ryper3D MMU upgrade which is available on [PrusaPrinters](https://www.printables.com/social/131886-ryper3d/models)
 
+## How the firmware works now? / ¿Cómo funciona el firmware ahora?
+
+1. The first time after flash **YOU HAVE TO** configure the numbers of filaments that use your MMU device / La primera vez tras flashear el firmware **SE TIENE** que configurar el número de filamentos que usa tu dispositivo MMU.
+Go to **Settings** / Ir al menú **Configuración**:
+![image](https://user-images.githubusercontent.com/7290345/188302287-c2146f4a-b71b-4ec6-bd95-aaba14d973f9.png)
+Go to **"Tune MMU"** / Ir a **Tune MMU**:
+![image](https://user-images.githubusercontent.com/7290345/188302323-5edc334c-501a-495b-81d9-b3b17eb51b9b.png)
+Select **Nr extruders** (5 by default) / Seleccionar **Nr extruders** (5 por defecto):
+![image](https://user-images.githubusercontent.com/7290345/188302342-89baba88-0f83-496d-b4e2-a0314683f825.png)
+And select the **number of filaments** / Y seleccionar **number of filaments**:
+![image](https://user-images.githubusercontent.com/7290345/188302375-c91112d1-07cb-47f9-a5fb-86afcf2f7aa3.png)
+This setting is **automatically stored** on the EEPROM / Esta configuración se **guarda automáticamente** en la EEPROM:
+![image](https://user-images.githubusercontent.com/7290345/188302386-c499b9bb-8e43-42a0-9f5d-c5dafc56c95e.png)
+
+2. Now we are ready to go to the **"Filament Actions"** Menu / Ahora estamos listos para usar el menú **Filament Actions**:
+![image](https://user-images.githubusercontent.com/7290345/188302434-a2da9e4d-ce03-4339-8ed4-f5cd4869a6d0.png)
+Select the filament of your needs using the filament selection menu (is limited to the number of filaments stored on the EEPROM) / Selecciona el filamento que necesites usando el menú de selección de filamento (está limitado al número de filamentos configurados en la EEPROM):
+![image](https://user-images.githubusercontent.com/7290345/188302455-c6b1ea3c-0acc-4ced-850d-847a31733bc4.png)
+![image](https://user-images.githubusercontent.com/7290345/188302487-bb8f03b5-20c6-4750-b3f5-108344fa33c8.png)
+![image](https://user-images.githubusercontent.com/7290345/188302496-4591caca-c8a2-4a12-9ea9-2ddf1d5902e3.png)
+**And perform any of the listed actions over that filament** / **Y ejecuta cualquiera de las acciones listadas sobre el filamento**
+![image](https://user-images.githubusercontent.com/7290345/188302543-307e0773-f401-4ec7-9d14-4f08e2a9db93.png)
 # Prusa Firmware MK3
 
 This repository contains the source code and the development versions of the firmware running on the [Original Prusa i3](https://prusa3d.com/) MK3S/MK3/MK2.5S/MK2.5 line of printers.
