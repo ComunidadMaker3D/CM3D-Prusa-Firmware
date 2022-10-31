@@ -3368,7 +3368,11 @@ calibrated:
 		current_position[Z_AXIS] = Z_MAX_POS-3.f;
 	}
 	else {
+		#ifdef BEAR
+		current_position[Z_AXIS] = Z_MAX_POS-3.f;
+		#else
 		current_position[Z_AXIS] = Z_MAX_POS+4.f;
+		#endif //BEAR
 	}
     plan_set_position_curposXYZE();
     return true;
