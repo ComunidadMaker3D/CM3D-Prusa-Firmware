@@ -720,10 +720,10 @@
 #define RR_CAL_POINT_Y_POSITION 292.0f
 
 //values for mesh bed leveling
-// #define MESH_BED_X0_CS 2.f
-// #define MESH_BED_Y0_CS 9.4f
-// #define MESH_BED_XN_CS 267.f
-// #define MESH_BED_YN_CS 300.f
+#define MESH_BED_X0_CS 2.f
+#define MESH_BED_Y0_CS 9.4f
+#define MESH_BED_XN_CS 267.f
+#define MESH_BED_YN_CS 300.f
 
 #define Y_OFFSET 8
 #define AXIS_MARGIN 60
