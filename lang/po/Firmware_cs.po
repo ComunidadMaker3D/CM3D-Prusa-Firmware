@@ -1465,35 +1465,41 @@ msgstr "Cas tisku"
 msgid "Printer IP Addr:"
 msgstr "IP adr. tiskarny:"
 
-# MSG_CHECK_STEEL_SHEET c=35
-#: messages.cpp:165
+#. MSG_REPRINT c=7
+#: ../../Firmware/messages.cpp:164
+msgid "Reprint"
+msgstr "Reprint"
+
+#. MSG_CHECK_STEEL_SHEET c=35
+#: ../../Firmware/messages.cpp:165
 msgid "Check the selected steel sheet:"
 msgstr "Zkontrolujte vybrany ocelovy plech:"
 
-#MSG_CHOOSE_NOZZLE c=24 r=2
-#: messages.cpp:171
+#. MSG_CHOOSE_NOZZLE c=24 r=2
+#: ../../Firmware/messages.cpp:171
 msgid "Choose the nozzle size:"
 msgstr "Vyberte velikost trysky:"
 
-#MSG_TUNE_MMU c=11
-#: messages.cpp:172
+#. MSG_TUNE_MMU c=11
+#: ../../Firmware/messages.cpp:172
 msgid "Tune MMU"
 msgstr "Naladit MMU"
 
-# MSG_MMU_STATUS c=10
-#: messages.cpp:173
+#. MSG_MMU_STATUS c=10
+#: ../../Firmware/messages.cpp:173
 msgid "MMU Status"
 msgstr ""
 
-# MSG_NR_EXTRUDERS c=12
-#: messages.cpp:174
+#. MSG_NR_EXTRUDERS c=12
+#: ../../Firmware/messages.cpp:174
 msgid "Nr Extruders"
 msgstr ""
 
-# MSG_SHEET_ALERT c=11
-#: messages.cpp:175
+#. MSG_SHEET_ALERT c=11
+#: ../../Firmware/messages.cpp:175
 msgid "Sheet alert"
 msgstr ""
+
 #. MSG_FOLLOW_CALIBRATION_FLOW c=20 r=8
 #: ../../Firmware/Marlin_main.cpp:1548 ../../Firmware/messages.cpp:42
 msgid ""

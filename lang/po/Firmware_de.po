@@ -1475,40 +1475,41 @@ msgstr "Druckzeit"
 msgid "Printer IP Addr:"
 msgstr "Drucker IP Adr.:"
 
-#MSG_REPRINT c=7
-#: messages.cpp:164
+#. MSG_REPRINT c=7
+#: ../../Firmware/messages.cpp:164
 msgid "Reprint"
 msgstr "Abdruck"
 
-#MSG_CHECK_STEEL_SHEET c=43
-#: messages.cpp:165
+#. MSG_CHECK_STEEL_SHEET c=43
+#: ../../Firmware/messages.cpp:165
 msgid "Check the selected steel sheet:"
 msgstr "Uberprufen Sie das installierte Stahlblech:"
 
-#MSG_CHOOSE_NOZZLE c=26 r=2
-#: messages.cpp:171
+#. MSG_CHOOSE_NOZZLE c=26 r=2
+#: ../../Firmware/messages.cpp:171
 msgid "Choose the nozzle size:"
 msgstr "Wahlen Sie die Dusengroße:"
 
-#MSG_TUNE_MMU c=8
-#: messages.cpp:172
+#. MSG_TUNE_MMU c=8
+#: ../../Firmware/messages.cpp:172
 msgid "Tune MMU"
 msgstr "Tune MMU"
 
-# MSG_MMU_STATUS c=10
-#: messages.cpp:173
+#. MSG_MMU_STATUS c=10
+#: ../../Firmware/messages.cpp:173
 msgid "MMU Status"
 msgstr ""
 
-# MSG_NR_EXTRUDERS c=12
-#: messages.cpp:174
+#. MSG_NR_EXTRUDERS c=12
+#: ../../Firmware/messages.cpp:174
 msgid "Nr Extruders"
 msgstr ""
 
-# MSG_SHEET_ALERT c=11
-#: messages.cpp:175
+#. MSG_SHEET_ALERT c=11
+#: ../../Firmware/messages.cpp:175
 msgid "Sheet alert"
 msgstr ""
+
 #. MSG_FOLLOW_CALIBRATION_FLOW c=20 r=8
 #: ../../Firmware/Marlin_main.cpp:1548 ../../Firmware/messages.cpp:42
 msgid ""
