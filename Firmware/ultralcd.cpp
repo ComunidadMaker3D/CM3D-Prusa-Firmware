@@ -8023,6 +8023,13 @@ void WorkaroundPrusaSN() {
 }
 #endif //PRUSA_SN_SUPPORT
 
+#ifdef TEMP_MODEL
+void temp_model_toggle(){
+	temp_model_set_enabled(!temp_model_enabled());
+	Config_StoreSettings();
+}
+#endif //TEMP_MODEL
+
 void lcd_experimental_menu()
 {
     MENU_BEGIN();
@@ -8043,6 +8050,10 @@ void lcd_experimental_menu()
 #ifdef PRUSA_SN_SUPPORT
     MENU_ITEM_FUNCTION_P(_N("Fake serial number"), WorkaroundPrusaSN);////MSG_WORKAROUND_PRUSA_SN c=18
 #endif //PRUSA_SN_SUPPORT
+
+#ifdef TEMP_MODEL
+    MENU_ITEM_TOGGLE_P(_N("Temp Model"), temp_model_enabled()?_T(MSG_ON):_T(MSG_OFF), temp_model_toggle);
+#endif //TEMP_MODEL
     MENU_END();
 }
 
