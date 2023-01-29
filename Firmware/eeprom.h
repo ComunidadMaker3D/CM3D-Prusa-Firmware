@@ -333,9 +333,6 @@ static_assert(sizeof(Sheets) == EEPROM_SHEETS_SIZEOF, "Sizeof(Sheets) is not EEP
 | ^           | ^       | ^                                     | 02h 2        | ^                     | watchdog                                          | ^            | ^
 | ^           | ^       | ^                                     | 03h 3        | ^                     | bad_isr                                           | ^            | ^
 | ^           | ^       | ^                                     | 04h 4        | ^                     | bad_pullup_temp_isr                               | ^            | ^
-| 0x0D02 3320		| uint8_t   | EEPROM_ED_SHEET_ALERT					| 00h 0			| ffh 255				| Disable sheet alert: __off__						| LCD menu      | D3 Ax0d03 C1
-| 0x0D01 3319       | uint16_t  | EEPROM_MMU_NR_EXTRUDERS               | 00h 0         | ffh 255               | Nr of extruders: __off__                          | LCD menu      | D3 Ax0d03 C1
-
 | ^           | ^       | ^                                     | 05h 5        | ^                     | bad_pullup_step_isr                               | ^            | ^
 | 0x0D02 3330 | uint8   | EEPROM_TEMP_MODEL_ENABLE              | 00h 0        | ff/00                 | Temp model deactivated                            | Temp model   | D3 Ax0d02 C1
 | ^           | ^       | ^                                     | 01h 1        | ^                     | Temp model activated                              | ^            | ^
@@ -360,6 +357,8 @@ static_assert(sizeof(Sheets) == EEPROM_SHEETS_SIZEOF, "Sizeof(Sheets) is not EEP
 | ^           | ^       | ^                                     | 20h 32       | ^                     | Free bit                                          | ^            | ^
 | ^           | ^       | ^                                     | 40h 64       | ^                     | Free bit                                          | ^            | ^
 | ^           | ^       | ^                                     | 80h 128      | ^                     | Unknown                                           | ^            | ^
+| 0x07D2 2002		| uint8_t   | EEPROM_ED_SHEET_ALERT					| 00h 0			| ffh 255				| Disable sheet alert: __off__						| LCD menu      | D3 Ax0d03 C1
+| 0x07D0 2000       | uint16_t  | EEPROM_MMU_NR_EXTRUDERS               | 00h 0         | ffh 255               | Nr of extruders: __off__                          | LCD menu      | D3 Ax0d03 C1
 
 |Address begin|Bit/Type | Name                                  | Valid values | Default/FactoryReset  | Description                                       |Gcode/Function| Debug code
 | :--:        | :--:    | :--:                                  | :--:         | :--:                  | :--:                                              | :--:         | :--:
@@ -575,9 +574,6 @@ static Sheets * const EEPROM_Sheets_base = (Sheets*)(EEPROM_SHEETS_BASE);
 #define EEPROM_ECOOL_ENABLE (EEPROM_JOB_ID-1) // uint8_t
 #define EEPROM_FW_CRASH_FLAG (EEPROM_ECOOL_ENABLE-1) // uint8_t
 
-#define EEPROM_ED_SHEET_ALERT (EEPROM_FW_CRASH_FLAG-1)
-#define EEPROM_MMU_NR_EXTRUDERS (EEPROM_ED_SHEET_ALERT-2)
-
 #define EEPROM_TEMP_MODEL_ENABLE (EEPROM_FW_CRASH_FLAG-1) // uint8_t
 #define EEPROM_TEMP_MODEL_P (EEPROM_TEMP_MODEL_ENABLE-4) // float
 #define EEPROM_TEMP_MODEL_C (EEPROM_TEMP_MODEL_P-4) // float
@@ -592,8 +588,12 @@ static Sheets * const EEPROM_Sheets_base = (Sheets*)(EEPROM_SHEETS_BASE);
 #define EEPROM_HEAT_BED_ON_LOAD_FILAMENT (EEPROM_TOTAL_TOOLCHANGE_COUNT-1) //uint8
 #define EEPROM_CALIBRATION_STATUS_V2 (EEPROM_HEAT_BED_ON_LOAD_FILAMENT-1) //uint8
 
+// CM3D eeprom values
+#define EEPROM_ED_SHEET_ALERT (EEPROM_CALIBRATION_STATUS_V2-1)
+#define EEPROM_MMU_NR_EXTRUDERS (EEPROM_ED_SHEET_ALERT-2)
+
 //This is supposed to point to last item to allow EEPROM overrun check. Please update when adding new items.
-#define EEPROM_LAST_ITEM EEPROM_CALIBRATION_STATUS_V2
+#define EEPROM_LAST_ITEM EEPROM_MMU_NR_EXTRUDERS
 // !!!!!
 // !!!!! this is end of EEPROM section ... all updates MUST BE inserted before this mark !!!!!
 // !!!!!
