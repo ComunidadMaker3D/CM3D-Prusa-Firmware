@@ -75,6 +75,7 @@
 // Canceled home position
 #define X_CANCEL_POS 50
 #define Y_CANCEL_POS 190
+#define Z_CANCEL_LIFT 50
 
 //Pause print position
 #define X_PAUSE_POS 50
@@ -139,7 +140,6 @@
 // Safety timer
 #define SAFETYTIMER
 #define DEFAULT_SAFETYTIMER_TIME_MINS 30
-#define FARM_DEFAULT_SAFETYTIMER_TIME_ms (45*60*1000ul)
 
 // Offline crash dumper
 #define XFLASH_DUMP     // enable dump functionality (including D20/D21/D22)
@@ -170,6 +170,8 @@
 #define DEBUG_DCODE3
 #define DEBUG_DCODE6
 
+//#define DEBUG_PULLUP_CRASH //Test Pullup crash
+
 //#define DEBUG_BUILD
 //#define DEBUG_SEC_LANG   //secondary language debug output at startup
 //#define DEBUG_XFLASH   //debug external spi flash
@@ -178,7 +180,6 @@
 #define DEBUG_DCODES //D codes
 #define DEBUG_STACK_MONITOR        //Stack monitor in stepper ISR
 //#define DEBUG_FSENSOR_LOG          //Reports fsensor status to serial
-//#define DEBUG_CRASHDET_COUNTERS  //Display crash-detection counters on LCD
 //#define DEBUG_RESUME_PRINT       //Resume/save print debug enable 
 //#define DEBUG_UVLO_AUTOMATIC_RECOVER // Power panic automatic recovery debug output 
 //#define DEBUG_DISABLE_XMINLIMIT  //x min limit ignored
@@ -192,7 +193,6 @@
 //#define DEBUG_DISABLE_SWLIMITS  //sw limits ignored
 //#define DEBUG_DISABLE_LCD_STATUS_LINE  //empty four lcd line
 //#define DEBUG_DISABLE_PREVENT_EXTRUDER //cold extrusion and long extrusion allowed
-//#define DEBUG_DISABLE_PRUSA_STATISTICS //disable prusa_statistics() mesages
 //#define DEBUG_DISABLE_FORCE_SELFTEST //disable force selftest
 //#define DEBUG_XSTEP_DUP_PIN 21   //duplicate x-step output to pin 21 (SCL on P3)
 //#define DEBUG_YSTEP_DUP_PIN 21   //duplicate y-step output to pin 21 (SCL on P3)
@@ -226,6 +226,7 @@
 #define TMC2130_INTPOL_XY   1         // extrapolate 256 for XY axes
 #define TMC2130_INTPOL_Z    1         // extrapolate 256 for Z axis
 #define TMC2130_INTPOL_E    1         // extrapolate 256 for E axis
+// #define ALLOW_ALL_MRES
 
 #define TMC2130_PWM_GRAD_X  2         // PWMCONF
 #define TMC2130_PWM_AMPL_X  230       // PWMCONF
@@ -362,7 +363,6 @@
 #define FANCHECK_AUTO_FAIL_THRS 20 //[RPS] - Used during selftest to identify a faulty fan
 
 
-
 /*------------------------------------
  LOAD/UNLOAD FILAMENT SETTINGS
  *------------------------------------*/
@@ -413,35 +413,28 @@
 
 #define TEMP_RUNAWAY_EXTRUDER_HYSTERESIS 15
 #define TEMP_RUNAWAY_EXTRUDER_TIMEOUT 45
+
 // model-based temperature check
-#define TEMP_MODEL 1          // enable model-based temperature checks
-#define TEMP_MODEL_DEBUG 1    // extended runtime logging
+#define TEMP_MODEL 1              // enable model-based temperature checks
+#define TEMP_MODEL_DEBUG 1        // extended runtime logging
 
-#define TEMP_MODEL_P 38.      // heater power (W)
+#define TEMP_MODEL_CAL_C_low 5    // C estimation lower limit
+#define TEMP_MODEL_CAL_C_high 20  // C estimation upper limit
+#define TEMP_MODEL_CAL_C_thr 0.01 // C estimation iteration threshold
+#define TEMP_MODEL_CAL_C_itr 30   // C estimation iteration limit
 
-#define TEMP_MODEL_C 12.1     // initial guess for heatblock capacitance (J/K)
-#define TEMP_MODEL_Cl 5       // C estimation lower limit
-#define TEMP_MODEL_Ch 20      // C estimation upper limit
-#define TEMP_MODEL_C_thr 0.01 // C estimation iteration threshold
-#define TEMP_MODEL_C_itr 30   // C estimation iteration limit
+#define TEMP_MODEL_CAL_R_low 5    // R estimation lower limit
+#define TEMP_MODEL_CAL_R_high 50  // R estimation upper limit
+#define TEMP_MODEL_CAL_R_thr 0.01 // R estimation iteration threshold
+#define TEMP_MODEL_CAL_R_itr 30   // R estimation iteration limit
 
-#define TEMP_MODEL_R 20.5     // initial guess for heatblock resistance (K/W)
-#define TEMP_MODEL_Rl 5       // R estimation lower limit
-#define TEMP_MODEL_Rh 50      // R estimation upper limit
-#define TEMP_MODEL_R_thr 0.01 // R estimation iteration threshold
-#define TEMP_MODEL_R_itr 30   // R estimation iteration limit
+#define TEMP_MODEL_CAL_T_low 50   // Default calibration cooling temperature (C)
+#define TEMP_MODEL_CAL_T_high 230 // Default calibration working temperature (C)
 
-#define TEMP_MODEL_Ta_corr -7 // Default ambient temperature correction
-#define TEMP_MODEL_LAG 2.1    // Temperature transport delay (s)
+#define TEMP_MODEL_Ta_corr -7     // Default ambient temperature correction
 
-#define TEMP_MODEL_W 1.2      // Default warning threshold (K/s)
-#define TEMP_MODEL_E 1.74     // Default error threshold (K/s)
-
-#define TEMP_MODEL_CAL_Th 230 // Default calibration working temperature (C)
-#define TEMP_MODEL_CAL_Tl 50  // Default calibration cooling temperature (C)
-
-// fall-back resistance vector (R0-15)
-#define TEMP_MODEL_Rv {TEMP_MODEL_R, 18.4, 16.7, 15.2, 14.1, 13.3, 12.7, 12.1, 11.7, 11.3, 11., 10.8, 10.6, 10.4, 10.2, 10.1}
+#include "temp_model/e3d_v6.h"
+#define TEMP_MODEL_DEFAULT E3D_V6 // Default model parameters
 
 
 /*------------------------------------
@@ -537,9 +530,6 @@
 /*-----------------------------------
  PREHEAT SETTINGS
  *------------------------------------*/
-
-#define FARM_PREHEAT_HOTEND_TEMP 250
-#define FARM_PREHEAT_HPB_TEMP 80
 
 #define PLA_PREHEAT_HOTEND_TEMP 215
 #define PLA_PREHEAT_HPB_TEMP 60
