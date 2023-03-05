@@ -1064,6 +1064,7 @@ void lcd_commands()
             [[fallthrough]];
 
         case 3:
+            temp_model_set_warn_beep(false);
             enquecommand_P(PSTR("M310 A F1"));
             lcd_commands_step = 2;
             break;
@@ -1077,6 +1078,7 @@ void lcd_commands()
         case 1:
             lcd_commands_step = 0;
             lcd_commands_type = LcdCommands::Idle;
+            temp_model_set_warn_beep(true);
             bool res = temp_model_autotune_result();
             if (eeprom_read_byte((uint8_t*)EEPROM_WIZARD_ACTIVE)) {
                 // resume the wizard
@@ -3959,7 +3961,7 @@ void lcd_v2_calibration()
 	    }
 	    else
 	    {
-	        loaded = lcd_show_fullscreen_message_yes_no_and_wait_P(_T(MSG_FILAMENT_LOADED), false, true);
+	        loaded = lcd_show_fullscreen_message_yes_no_and_wait_P(_T(MSG_FILAMENT_LOADED), false, false);
 	        lcd_update_enabled = true;
 
 	    }
@@ -4228,9 +4230,9 @@ void lcd_wizard(WizState state)
 			break;
 #ifdef TEMP_MODEL
 		case S::TempModel:
-			lcd_show_fullscreen_message_and_wait_P(_i("Temp model cal. takes approx. 12 mins."));////MSG_TM_CAL c=20 r=4
+			lcd_show_fullscreen_message_and_wait_P(_i("Thermal model cal. takes approx. 12 mins. See\nprusa.io/tm-cal"));////MSG_TM_CAL c=20 r=4
 			lcd_commands_type = LcdCommands::TempModel;
-			end = true; // Leave wizard temporarily for Temp model cal.
+			end = true; // Leave wizard temporarily for TM cal.
 			break;
 #endif //TEMP_MODEL
 		case S::IsFil:
@@ -4239,10 +4241,10 @@ void lcd_wizard(WizState state)
 			setTargetBed(PLA_PREHEAT_HPB_TEMP);
 			if (mmu_enabled)
 			{
-			    wizard_event = lcd_show_fullscreen_message_yes_no_and_wait_P(_T(MSG_FILAMENT_LOADED), true);
+			    wizard_event = lcd_show_fullscreen_message_yes_no_and_wait_P(_T(MSG_FILAMENT_LOADED), false, false);
 			} else
 			{
-			    wizard_event = lcd_show_fullscreen_message_yes_no_and_wait_P(_T(MSG_FILAMENT_LOADED), true);
+			    wizard_event = lcd_show_fullscreen_message_yes_no_and_wait_P(_T(MSG_FILAMENT_LOADED), false, false);
 			}
 			if (wizard_event) state = S::Lay1CalCold;
 			else
@@ -5068,7 +5070,7 @@ static void lcd_calibration_menu()
 #endif
   }
 #ifdef TEMP_MODEL
-    MENU_ITEM_SUBMENU_P(_n("Temp Model cal."), lcd_temp_model_cal);
+    MENU_ITEM_SUBMENU_P(_n("Thermal Model cal."), lcd_temp_model_cal);
 #endif //TEMP_MODEL
   
   MENU_END();
@@ -6693,8 +6695,9 @@ bool lcd_selftest()
 	
 	if (_result)
 	{
-		LCD_ALERTMESSAGERPGM(_i("Self test OK"));////MSG_SELFTEST_OK c=20
 		calibration_status_set(CALIBRATION_STATUS_SELFTEST);
+		lcd_setstatuspgm(_i("Self test OK"));////MSG_SELFTEST_OK c=20
+		lcd_return_to_status();
 	}
 	else
 	{
