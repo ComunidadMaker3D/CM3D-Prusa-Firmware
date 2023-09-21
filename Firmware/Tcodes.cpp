@@ -12,7 +12,7 @@
 static const char duplicate_Tcode_ignored[] PROGMEM = "Duplicate T-code ignored.";
 
 inline bool IsInvalidTCode(char *const s, uint8_t i) { 
-    return ((s[i] < '0' || s[i] > '4') && s[i] != '?' && s[i] != 'x' && s[i] != 'c'); 
+    return ((s[i] < '0' || s[i] > '9') && s[i] != '?' && s[i] != 'x' && s[i] != 'c'); 
 }
 
 inline void TCodeInvalid() { 

@@ -396,7 +396,7 @@ THERMISTORS SETTINGS
 
 #define M600_TIMEOUT 600  //seconds
 
-#define MMU_FILAMENT_COUNT 5
+#define MMU_FILAMENT_COUNT 10
 //#define SUPPORT_VERBOSITY
 
 // Default Arc Interpolation Settings (Now configurable via M214)
