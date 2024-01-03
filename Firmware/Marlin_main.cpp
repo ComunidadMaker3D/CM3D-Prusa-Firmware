@@ -2181,7 +2181,7 @@ bool calibrate_z_auto()
 	st_synchronize();
 	enable_endstops(endstops_enabled);
 	if (PRINTER_TYPE == PRINTER_MK3) {
-		current_position[Z_AXIS] = Z_MAX_POS + 2.0;
+		current_position[Z_AXIS] = Z_MAX_POS + Z_MAX_GAP;
 	}
 	else {
 		current_position[Z_AXIS] = Z_MAX_POS + 9.0;
