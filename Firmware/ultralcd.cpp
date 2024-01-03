@@ -6226,7 +6226,7 @@ static bool lcd_selfcheck_axis_sg(uint8_t axis) {
 	float max_error_mm = 5;
 	switch (axis) {
 	case 0: axis_length = X_MAX_POS + (-X_MIN_POS); break;
-	case 1: axis_length = Y_MAX_POS - Y_MIN_POS + 4; break;
+	case 1: axis_length = Y_MAX_POS + Y_OFFSET; break;
 	default: axis_length = Z_MAX_POS; break;
 	}
 
@@ -6289,6 +6289,9 @@ static bool lcd_selfcheck_axis_sg(uint8_t axis) {
 
 	for(uint_least8_t i = 0; i < 2; i++){ //check if measured axis length corresponds to expected length
 		printf_P(_N("Measured axis length:%.3f\n"), measured_axis_length[i]);
+		#ifdef HEATBED_CS
+		if (i==0) { max_error_mm = MAX_ERROR_X;} else { max_error_mm = MAX_ERROR_Y;}
+		#endif
 		if (fabs(measured_axis_length[i] - axis_length) > max_error_mm) {
 			enable_endstops(false);
 
