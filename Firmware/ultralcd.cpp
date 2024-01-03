@@ -6222,12 +6222,12 @@ static bool lcd_selfcheck_axis_sg(uint8_t axis) {
 // each axis length is measured twice
 	float axis_length, current_position_init, current_position_final;
 	float measured_axis_length[2];
-	float margin = 60;
+	float margin = AXIS_MARGIN;
 	float max_error_mm = 5;
 	switch (axis) {
-	case 0: axis_length = X_MAX_POS; break;
+	case 0: axis_length = X_MAX_POS + (-X_MIN_POS); break;
 	case 1: axis_length = Y_MAX_POS - Y_MIN_POS + 4; break;
-	default: axis_length = 210; break;
+	default: axis_length = Z_MAX_POS; break;
 	}
 
 	tmc2130_sg_stop_on_crash = false;
