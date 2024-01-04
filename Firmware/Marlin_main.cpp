@@ -3241,7 +3241,7 @@ bool gcode_M45(bool onlyZ, int8_t verbosity_level)
 //#ifndef NEW_XYZCAL
 				if (result >= 0)
 				{
-					#ifdef HEATBED_V2
+					#if defined(HEATBED_V2) || defined(HEATBED_CS)
 					sample_z();
 					#else //HEATBED_V2
 					point_too_far_mask = 0;
