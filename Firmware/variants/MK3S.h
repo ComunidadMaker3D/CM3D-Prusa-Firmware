@@ -661,6 +661,46 @@
 #define MMU_ERR_Y_PAUSE_POS 0
 #define MMU_ERR_Z_PAUSE_LIFT 20
 
+//CM3D settings
+
+#define Z_MAX_GAP 2.0 //free gap distance after reach the Z_MAX_POS
+/**
+ * [0,0] bed print area point X coordinate in bed coordinates ver. 05d/24V
+ */
+#define BED_PRINT_ZERO_REF_X 2.f
+/**
+ * [0,0] bed print area point Y coordinate in bed coordinates ver. 05d/24V
+ */
+#define BED_PRINT_ZERO_REF_Y 9.4f
+
+/**
+ * @brief Positions of the bed reference points in print area coordinates. ver. 05d/24V
+ *
+ * Numeral constants are in bed coordinates, subtracting macro defined values converts it to print area coordinates.
+ *
+ * The points are the following:
+ * MK2: center front, center right, center rear, center left.
+ * MK25 and MK3: front left, front right, rear right, rear left
+ */
+
+#define	FL_CAL_POINT_X_POSITION 37.f 
+#define FL_CAL_POINT_Y_POSITION 18.4f
+
+#define FR_CAL_POINT_X_POSITION 245.f
+#define FR_CAL_POINT_Y_POSITION 18.4f
+
+#define RR_CAL_POINT_X_POSITION 245.f
+#define RR_CAL_POINT_Y_POSITION 210.4f
+
+#define RL_CAL_POINT_X_POSITION 37.f
+#define RL_CAL_POINT_Y_POSITION 210.4f
+
+#define Y_OFFSET 8
+#define AXIS_MARGIN 60
+
+#define MAX_ERROR_X 5
+#define MAX_ERROR_Y 5
+
 // Default Arc Interpolation Settings (Now configurable via M214)
 #define DEFAULT_N_ARC_CORRECTION       25 // Number of interpolated segments between corrections.
 /* A value of 1 or less for N_ARC_CORRECTION will trigger the use of Sin and Cos for every arc, which will improve accuracy at the
