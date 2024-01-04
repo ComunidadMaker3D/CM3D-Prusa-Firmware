@@ -683,7 +683,7 @@
  * MK25 and MK3: front left, front right, rear right, rear left
  */
 
-#define	FL_CAL_POINT_X_POSITION 37.f 
+#define FL_CAL_POINT_X_POSITION 37.f 
 #define FL_CAL_POINT_Y_POSITION 18.4f
 
 #define FR_CAL_POINT_X_POSITION 245.f
