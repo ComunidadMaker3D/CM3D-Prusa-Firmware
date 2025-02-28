@@ -2,28 +2,30 @@
 #define CONFIGURATION_PRUSA_H
 
 #include <limits.h>
-
 #include "printers.h"
 /*------------------------------------
  GENERAL SETTINGS
  *------------------------------------*/
 
 // Printer revision
-#define PRINTER_TYPE PRINTER_MK3
-#define PRINTER_NAME PRINTER_MK3_NAME
-#define PRINTER_NAME_ALTERNATE PRINTER_MK3S_NAME //the other similar printer to this.
-#define PRINTER_MMU_TYPE PRINTER_MK3_MMU3
-#define PRINTER_MMU_NAME PRINTER_MK3_MMU3_NAME
-#define FILAMENT_SIZE "1_75mm_MK3"
-#define NOZZLE_TYPE "E3DREVO"
+#define PRINTER_TYPE PRINTER_MK3S
+#define PRINTER_NAME PRINTER_MK3S_NAME
+#define PRINTER_NAME_ALTERNATE PRINTER_MK3_NAME //the other similar printer to this.
+#define PRINTER_MMU_TYPE PRINTER_MK3S_MMU3
+#define PRINTER_MMU_NAME PRINTER_MK3S_MMU3_NAME
+#define FILAMENT_SIZE "1_75mm_MK3S"
+#define NOZZLE_TYPE "E3Dv6full"
 
 // Printer name
-#define CUSTOM_MENDEL_NAME "Prusa i3 MK3-R"
+#define CUSTOM_MENDEL_NAME "Prusa i3 MK3S XL"
 
 // Electronics
 #define MOTHERBOARD BOARD_EINSY_1_0a
 #define STEEL_SHEET
 #define HAS_SECOND_SERIAL_PORT
+
+// PSU
+// #define PSU_Delta                                 // uncomment if DeltaElectronics PSU installed
 
 
 // Uncomment the below for the E3D PT100 temperature sensor (with or without PT100 Amplifier)
@@ -57,24 +59,24 @@
 #define MANUAL_Z_HOME_POS 0.2
 
 // Travel limits after homing
-#define X_MAX_POS 255
+#define X_MAX_POS 302
 #define X_MIN_POS 0
-#define Y_MAX_POS 212.5
-#define Y_MIN_POS -4 //orig -4
-#define Z_MAX_POS 210
+#define Y_MAX_POS 305.6
+#define Y_MIN_POS -13.4 //orig -13.4
+#define Z_MAX_POS 430
 #define Z_MIN_POS 0.15
 
 // Z height correction value
-#define Z_MAX_POS_XYZ_CALIBRATION_CORRECTION 2
+#define Z_MAX_POS_XYZ_CALIBRATION_CORRECTION 9
 
 // Canceled home position
 #define X_CANCEL_POS 50
-#define Y_CANCEL_POS 190
+#define Y_CANCEL_POS 280
 #define Z_CANCEL_LIFT 50
 
 //Pause print position
 #define X_PAUSE_POS 50
-#define Y_PAUSE_POS 190
+#define Y_PAUSE_POS 280
 #define Z_PAUSE_LIFT 20
 
 #define NUM_AXIS 4 // The axis order in all axis related arrays is X, Y, Z, E
@@ -118,7 +120,7 @@
 
 //Crash detection
 #define CRASHDET_TIMER 45 //seconds
-#define CRASHDET_COUNTER_MAX 3
+#define CRASHDET_COUNTER_MAX 3 
 
 // New XYZ calibration
 #define NEW_XYZCAL
@@ -147,10 +149,10 @@
 
 // Filament sensor
 #define FILAMENT_SENSOR
-#define FILAMENT_SENSOR_TYPE FSENSOR_PAT9125
+#define FILAMENT_SENSOR_TYPE FSENSOR_IR_ANALOG
 #define FSENSOR_PROBING
 
-// Backlash -
+// Backlash - 
 //#define BACKLASH_X
 //#define BACKLASH_Y
 
@@ -178,15 +180,15 @@
 #define DEBUG_DCODES //D codes
 #define DEBUG_STACK_MONITOR        //Stack monitor in stepper ISR
 //#define DEBUG_CRASHDET_COUNTERS  //Display crash-detection counters on LCD
-//#define DEBUG_RESUME_PRINT       //Resume/save print debug enable
-//#define DEBUG_UVLO_AUTOMATIC_RECOVER // Power panic automatic recovery debug output
+//#define DEBUG_RESUME_PRINT       //Resume/save print debug enable 
+//#define DEBUG_UVLO_AUTOMATIC_RECOVER // Power panic automatic recovery debug output 
 //#define DEBUG_DISABLE_XMINLIMIT  //x min limit ignored
 //#define DEBUG_DISABLE_XMAXLIMIT  //x max limit ignored
 //#define DEBUG_DISABLE_YMINLIMIT  //y min limit ignored
 //#define DEBUG_DISABLE_YMAXLIMIT  //y max limit ignored
 //#define DEBUG_DISABLE_ZMINLIMIT  //z min limit ignored
 //#define DEBUG_DISABLE_ZMAXLIMIT  //z max limit ignored
-#define DEBUG_DISABLE_STARTMSGS //no startup messages
+#define DEBUG_DISABLE_STARTMSGS //no startup messages 
 //#define DEBUG_DISABLE_MINTEMP   //mintemp error ignored
 //#define DEBUG_DISABLE_SWLIMITS  //sw limits ignored
 //#define DEBUG_DISABLE_LCD_STATUS_LINE  //empty four lcd line
@@ -330,22 +332,27 @@
 #define  DEFAULT_Ki 1.60
 #define  DEFAULT_Kd 73.76
 #else
-// Define PID constants for E3D REVO
-#define  DEFAULT_Kp 25.00
-#define  DEFAULT_Ki 4.8
-#define  DEFAULT_Kd 32.6
+// Define PID constants for extruder
+//#define  DEFAULT_Kp 40.925
+//#define  DEFAULT_Ki 4.875
+//#define  DEFAULT_Kd 86.085
+#define  DEFAULT_Kp 16.13
+#define  DEFAULT_Ki 1.1625
+#define  DEFAULT_Kd 56.23
 #endif
 
 // Extrude mintemp
 #define EXTRUDE_MINTEMP 175
 
 // Quick nozzle change supported
-#define QUICK_NOZZLE_CHANGE
+//#define QUICK_NOZZLE_CHANGE
 
 // Extruder cooling fans
 #define EXTRUDER_0_AUTO_FAN_PIN   8
 #define EXTRUDER_AUTO_FAN_TEMPERATURE 50
 #define EXTRUDER_AUTO_FAN_SPEED   255  // == full speed
+#define EXTRUDER_ALTFAN_DETECT
+#define EXTRUDER_ALTFAN_SPEED_SILENT 128
 
 #define FANCHECK_AUTO_PRINT_FAN_THRS 70 //[RPS] - Used during selftest to identify swapped fans automatically
 #define FANCHECK_AUTO_FAIL_THRS 20 //[RPS] - Used during selftest to identify a faulty fan
@@ -357,19 +364,19 @@
 // Filament change configuration
 #define FILAMENTCHANGEENABLE
 #ifdef FILAMENTCHANGEENABLE
-#define FILAMENTCHANGE_XPOS 211
+#define FILAMENTCHANGE_XPOS 261
 #define FILAMENTCHANGE_YPOS 0
 #define FILAMENTCHANGE_ZADD 2
 #define FILAMENTCHANGE_FIRSTRETRACT -2
 #define FILAMENTCHANGE_FINALRETRACT 0
 
 #define FILAMENTCHANGE_FIRSTFEED 70 //E distance in mm for fast filament loading sequence used used in filament change (M600)
-#define FILAMENTCHANGE_FINALFEED 25 //E distance in mm for slow filament loading sequence used used in filament change (M600) and filament load (M701)
+#define FILAMENTCHANGE_FINALFEED 25 //E distance in mm for slow filament loading sequence used used in filament change (M600) and filament load (M701) 
 #define FILAMENTCHANGE_RECFEED 5
 
 #define FILAMENTCHANGE_XYFEED 50
 #define FILAMENTCHANGE_EFEED_FIRST 20 // feedrate in mm/s for fast filament loading sequence used in filament change (M600)
-#define FILAMENTCHANGE_EFEED_FINAL 3.3f // feedrate in mm/s for slow filament loading sequence used in filament change (M600) and filament load (M701)
+#define FILAMENTCHANGE_EFEED_FINAL 3.3f // feedrate in mm/s for slow filament loading sequence used in filament change (M600) and filament load (M701) 
 //#define FILAMENTCHANGE_RFEED 400
 #define FILAMENTCHANGE_RFEED 7000 / 60
 #define FILAMENTCHANGE_EXFEED 2
@@ -383,7 +390,6 @@
 #define FILAMENTCHANGE_COMMUNITY_ROOZEFEED -10 //E retract distance in mm for ooze prevention
 #define FILAMENTCHANGE_COMMUNITY_EOOZEFEED 4 //E extrude distance in mm for ooze prevention
 #endif //End COMMUNITY_PREVENT_OOZE
-
 #endif
 
 /*------------------------------------
@@ -416,8 +422,8 @@
 
 #define THERMAL_MODEL_Ta_corr -7     // Default ambient temperature correction
 
-#include "thermal_model/e3d_REVO.h"
-#define THERMAL_MODEL_DEFAULT E3D_REVO // Default E3D REVO model parameters
+#include "thermal_model/e3d_v6.h"
+#define THERMAL_MODEL_DEFAULT E3D_V6 // Default model parameters
 
 /*------------------------------------
  HOST FEATURES
@@ -501,9 +507,9 @@
 #define  DEFAULT_bedKi 1.60
 #define  DEFAULT_bedKd 73.76
 #else
-#define  DEFAULT_bedKp 126.13
-#define  DEFAULT_bedKi 4.30
-#define  DEFAULT_bedKd 924.76
+#define  DEFAULT_bedKp 67.37
+#define  DEFAULT_bedKi 3.21
+#define  DEFAULT_bedKd 353.32
 #endif
 
 //120v 250W silicone heater into 4mm borosilicate (MendelMax 1.5+)
@@ -654,7 +660,7 @@
 // "dropsegments" steps long. All the above rules still need to apply.
 #define UVLO_TINY_Z_AXIS_SHIFT 0.16
 // If power panic occured, and the current temperature is higher then target temperature before interrupt minus this offset, print will be recovered automatically.
-#define AUTOMATIC_UVLO_BED_TEMP_OFFSET 5
+#define AUTOMATIC_UVLO_BED_TEMP_OFFSET 5 
 
 #define HEATBED_V2
 
@@ -662,17 +668,68 @@
 
 //#define SUPPORT_VERBOSITY
 
-#define MMU_CONFIG_FILE "mmu2/variants/config_MMU2.h"
+#define MMU_CONFIG_FILE "mmu2/variants/config_MMU2S.h"
 #define MMU_FILAMENT_COUNT 10
 //#define MMU_FORCE_STEALTH_MODE
 #define MMU_HWRESET
 #define MMU_DEBUG //print communication between MMU and printer on serial
 #define MMU_HAS_CUTTER
 
+// This is experimental feature requested by our test department.
+// There is no known use for ordinary user. If enabled by this macro
+// and enabled from printer menu (not enabled by default). It cuts filament
+// every time when switching filament from gcode. MMU_HAS_CUTTER needs to be
+// defined.
+
+//#define MMU_ALWAYS_CUT
+
 // MMU Error pause position
 #define MMU_ERR_X_PAUSE_POS 125
 #define MMU_ERR_Y_PAUSE_POS 0
 #define MMU_ERR_Z_PAUSE_LIFT 20
+
+//CM3D settings
+
+#define Z_MAX_GAP 7.0 //free gap distance after reach the Z_MAX_POS
+/**
+ * [0,0] bed print area point X coordinate in bed coordinates ver. 05d/24V
+ */
+#define BED_PRINT_ZERO_REF_X 0.5f
+/**
+ * [0,0] bed print area point Y coordinate in bed coordinates ver. 05d/24V
+ */
+#define BED_PRINT_ZERO_REF_Y 13.4f
+
+/**
+ * @brief Positions of the bed reference points in print area coordinates. ver. 05d/24V
+ *
+ * Numeral constants are in bed coordinates, subtracting macro defined values converts it to print area coordinates.
+ *
+ * The points are the following:
+ * MK2: center front, center right, center rear, center left.
+ * MK25 and MK3: front left, front right, rear right, rear left
+ */
+
+#define FL_CAL_POINT_X_POSITION 38.5f 
+#define FR_CAL_POINT_X_POSITION 263.0f
+#define RL_CAL_POINT_X_POSITION 38.5f
+#define RR_CAL_POINT_X_POSITION 263.0f
+#define FL_CAL_POINT_Y_POSITION 37.3f
+#define FR_CAL_POINT_Y_POSITION 37.3f
+#define RL_CAL_POINT_Y_POSITION 292.0f
+#define RR_CAL_POINT_Y_POSITION 292.0f
+
+//values for mesh bed leveling
+#define MESH_BED_X0_CS 2.f
+#define MESH_BED_Y0_CS 9.4f
+#define MESH_BED_XN_CS 267.f
+#define MESH_BED_YN_CS 300.f
+
+#define Y_OFFSET 8
+#define AXIS_MARGIN 60
+
+#define MAX_ERROR_X 2.5
+#define MAX_ERROR_Y 6.5
 
 // Default Arc Interpolation Settings (Now configurable via M214)
 #define DEFAULT_N_ARC_CORRECTION       25 // Number of interpolated segments between corrections.
